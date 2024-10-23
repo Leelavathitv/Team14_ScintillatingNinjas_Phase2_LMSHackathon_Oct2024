@@ -1,4 +1,4 @@
-package stepDefinition;
+package stepDefinitions;
 
 public class LoginStep {
 
