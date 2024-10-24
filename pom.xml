@@ -17,6 +17,7 @@
     <artifactId>cucumber-java</artifactId>
     <version>7.18.1</version>
 </dependency>
+
 <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-testng -->
 <dependency>
     <groupId>io.cucumber</groupId>
@@ -30,6 +31,12 @@
     <version>7.10.2</version>
     <scope>test</scope>
 </dependency>
+
+		<dependency>
+			<groupId>io.github.bonigarcia</groupId>
+			<artifactId>webdrivermanager</artifactId>
+			<version>5.8.0</version>
+		</dependency>
 
 <!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-cucumber7-jvm -->
 <dependency>
@@ -104,10 +111,11 @@
 </dependency>
 <!-- https://mvnrepository.com/artifact/picocontainer/picocontainer -->
 <dependency>
-    <groupId>picocontainer</groupId>
-    <artifactId>picocontainer</artifactId>
-    <version>1.2</version>
-</dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-picocontainer</artifactId>
+			<version>7.16.0</version>
+			<scope>test</scope>
+		</dependency>
 
 
   </dependencies>
