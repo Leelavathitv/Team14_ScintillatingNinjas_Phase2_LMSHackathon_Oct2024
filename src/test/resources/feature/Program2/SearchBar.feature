@@ -1,6 +1,7 @@
 @Program2
 Feature: Manage Program - Search bar
 
+
   Background: Admin is on program module after reaching dashboard
     Given Admin is on Program module
     When Admin is logged in successfully and is in program module page
@@ -20,3 +21,4 @@ Feature: Manage Program - Search bar
   Scenario: Verify Admin is able to search with partial program name
     When Admin enter the program to search By partial name of program
     Then Admin should able to see Program name, description, and status for searched program name
+

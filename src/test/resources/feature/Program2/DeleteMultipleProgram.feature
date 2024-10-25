@@ -34,3 +34,4 @@ Feature: Manage Program - Delete Multiple Program
     Given Admin is on Program Confirm Deletion Page after selecting a program to delete
     When Admin click on "X" button
     Then Admin can see Confirm Deletion form disappear
+
