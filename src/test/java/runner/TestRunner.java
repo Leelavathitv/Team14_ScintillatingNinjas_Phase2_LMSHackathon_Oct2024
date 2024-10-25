@@ -11,7 +11,7 @@ import io.cucumber.testng.CucumberOptions;
 
 
 @CucumberOptions(
-		 features = {"src/test/resources/feature"},
+		 features = {"src/test/resources/feature/ProgramModuleFeatures/002_AddNewProgram_EditProgram.feature"},
    glue = {"stepDefinition","hooks"},
    monochrome = true,
 
