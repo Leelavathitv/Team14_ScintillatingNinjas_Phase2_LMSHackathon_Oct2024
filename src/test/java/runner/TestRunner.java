@@ -10,12 +10,12 @@ import io.cucumber.testng.CucumberOptions;
 
 
 
-
-
 @CucumberOptions(
 		 features = {"src/test/resources/feature"},
    glue = {"stepDefinition","hooks"},
    monochrome = true,
+
+	
 
 
   tags= "",

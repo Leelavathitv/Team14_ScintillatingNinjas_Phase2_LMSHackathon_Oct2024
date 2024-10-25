@@ -4,15 +4,19 @@ import io.cucumber.java.en.*;
 
 public class ClassSteps {
 	
+
 	@Given("Admin is in the Dashboard page after login")
 	public void admin_is_in_the_dashboard_page_after_login() {
+
 	   
 	    
 	}
 
+
 	@Given("Admin is in the Dashboard Page")
 	public void admin_is_in_the_dashboard_page() {
-	    
+
+	
 	    
 	}
 
@@ -34,12 +38,12 @@ public class ClassSteps {
 	    
 	}
 
+
 	@Then("Admin should see this {string} Title")
 	public void admin_should_see_this_title(String string) {
-	    
-	    
-	}
 
+
+	}
 	@Then("Admin should see the {string} Header")
 	public void admin_should_see_the_header(String string) {
 	    
@@ -184,7 +188,10 @@ public class ClassSteps {
 	    
 	}
 
+
 	@When("Admin clicks Cancel or Close X icon on Admin details form in class module")
+
+
 	public void admin_clicks_cancel_or_close_x_icon_on_admin_details_form_in_class_module()  {
 	    
 	    
@@ -510,8 +517,11 @@ public class ClassSteps {
 	    
 	}
 
+
 	@When("Admin clicks the Last page link")
 	public void admin_clicks_the_last_page_link() {
+
+
 	    
 	    
 	}
