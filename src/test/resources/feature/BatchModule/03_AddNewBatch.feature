@@ -1,3 +1,4 @@
+@AddNewBatch
 Feature: Add New Batch
 
   Background: Admin is on the Batch page

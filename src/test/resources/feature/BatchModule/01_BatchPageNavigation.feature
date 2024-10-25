@@ -1,3 +1,4 @@
+@BatchNav
 Feature: Batch Page Navigation Functionality
 
   Background: Admin successfully Logged on to the LMS Portal

@@ -1,3 +1,4 @@
+@BatchValidation
 Feature: LMS Portal Batch Page Validation Functionality
 
   Background: Admin is on the Dashboard page after Login

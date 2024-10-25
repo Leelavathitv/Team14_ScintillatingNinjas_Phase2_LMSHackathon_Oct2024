@@ -1,3 +1,4 @@
+@DeleteBatch
 Feature: Delete batch validation
 
   Background: Admin is on the batch page

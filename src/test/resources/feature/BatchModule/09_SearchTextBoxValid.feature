@@ -1,3 +1,4 @@
+@BatchSearchTextBox
 Feature: Search Text box validation
 
   Background: Admin is on the batch page

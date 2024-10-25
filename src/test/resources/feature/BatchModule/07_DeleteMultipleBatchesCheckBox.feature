@@ -1,3 +1,4 @@
+@DeleteMulBatch
 Feature: Delete multiple batches with check box
 
   Background: Admin is on the batch page

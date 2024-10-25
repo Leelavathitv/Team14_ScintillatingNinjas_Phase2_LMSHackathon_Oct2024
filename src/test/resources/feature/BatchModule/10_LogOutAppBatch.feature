@@ -1,3 +1,4 @@
+@BatchLogOut
 Feature: LogOut of the application from the batch page
 
   Background: Admin is on the batch page

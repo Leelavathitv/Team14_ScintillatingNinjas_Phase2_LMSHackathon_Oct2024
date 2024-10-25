@@ -1,3 +1,4 @@
+@NewBatchPopUp
 Feature: Add New Batch details pop up
 
   Background: Admin is on the Add new batch pop up

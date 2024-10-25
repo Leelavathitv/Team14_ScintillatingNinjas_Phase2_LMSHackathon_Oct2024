@@ -1,3 +1,4 @@
+@BatchPagination
 Feature: Pagination Validation
 
   Background: Admin is on the batch page

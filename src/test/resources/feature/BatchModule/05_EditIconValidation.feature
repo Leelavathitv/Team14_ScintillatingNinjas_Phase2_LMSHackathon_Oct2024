@@ -1,3 +1,4 @@
+@BatchEditIcon
 Feature: Edit icon Validation
 
   Background: Admin is on the batch page
