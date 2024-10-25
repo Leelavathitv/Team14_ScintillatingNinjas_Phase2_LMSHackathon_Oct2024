@@ -11,7 +11,7 @@ Feature: Pagination Class
 
   
   Scenario: Verify Last Page link(>>)
-    When Admin clicks Last page link
+    When Admin clicks the Last page link
     Then Admin should see the last page record on the table with Next page link are disabled
     
     

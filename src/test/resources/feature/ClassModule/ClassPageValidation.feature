@@ -3,7 +3,7 @@
 Feature: Class Page Validation
 
 Background: Admin is on the Dashboard page after login
-			Given Admin is on the Dashboard page after login
+			Given Admin is in the Dashboard page after login
   
  
   Scenario: Validating the class manage page
@@ -13,7 +13,7 @@ Background: Admin is on the Dashboard page after login
   
   Scenario: Validating the Title in the Manage class page
     When Admin clicks the Class Navigation bar in the Header
-    Then Admin should see the "LMS-Learning Management System" Title
+    Then Admin should see this "LMS-Learning Management System" Title
 
 
   Scenario: Validating the Header in the Manage class page

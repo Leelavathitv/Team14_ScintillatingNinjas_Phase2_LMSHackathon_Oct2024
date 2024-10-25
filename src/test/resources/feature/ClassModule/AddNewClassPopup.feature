@@ -38,7 +38,7 @@ Background: Admin is on the Manage class page after login
     Then class will not be created and admin gets error message
     
     
-  Scenario: Validate Cancel/Close(X) icon on Class details form
+  Scenario: Validate Cancel or Close X icon on Class details form
     When Admin clicks Cancel or Close X icon on Admin details form in class module
     Then Class details popup window should be closed without saving
     
