@@ -1,21 +1,60 @@
 package stepDefinitions;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.WebDriver;
+
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pageObjects.DashboardPage;
+import pageObjects.Program2Page;
+import testContext.TestContext;
+import utilities.ResourceBundleReader;
 
 public class ProgramStep2 {
+	Program2Page Program2;
+	TestContext testContext;
+	WebDriver driver;
+	ResourceBundleReader resourceBundleReader;
+	Logger logger= LogManager.getLogger(LoginStep.class);
+	private DashboardPage dashboard;
+	
+//	public DashboardStep(TestContext testcontext) {
+//		this.testContext = testcontext;
+//		this.dashboard = testcontext.getPageObjectManager().getDashboardPage();
+//		this.resourceBundleReader = testcontext.getResourceBundleReader();
+//		this.driver = testcontext.getDriverManager().getDriver();
+//	}
+	
+    @SuppressWarnings("static-access")
+	public ProgramStep2(TestContext testcontext) {
+    	this.testContext = testcontext;
+    	this.dashboard = testcontext.getPageObjectManager().getDashboardPage();
+    	this.resourceBundleReader = testcontext.getResourceBundleReader();
+    	this.driver=testcontext.getDriverManager().getDriver();
+    	if (driver == null) {
+            throw new IllegalStateException("WebDriver is not initialized");
+        }
+        this.Program2 = new Program2Page(driver);
+    }
 	
 	@Given("Admin is on the Program module")
 	public void admin_is_on_the_program_module() {
+		//driver.get("https://lms-frontend-hackathon-oct24-173fe394c071.herokuapp.com/login");
+		logger.info("admin is in program module page");
 	}
 
 	@When("Admin is logged in successfully and is in program module page")
 	public void admin_is_on_program_module_after_reaching_dashboard() {
+		dashboard.login();
+		Program2.programModulePage();
 	}
 
 	@When("Admin clicks on delete button for a program")
 	public void admin_clicks_on_delete_button_for_a_program() {
+		Program2.programClick();
+		Program2.deletePgm();
 	}
 
 	@Then("Admin will get confirm deletion popup")
@@ -24,18 +63,23 @@ public class ProgramStep2 {
 
 	@Given("Admin is on Confirm deletion form")
 	public void admin_is_on_confirm_deletion_form() {
+		
 	}
 
 	@When("Admin clicks on {string} button")
 	public void admin_clicks_on_button(String string) {
+		Program2.deleteYes();
 	}
+	
 
 	@Then("Admin can see {string} message")
 	public void admin_can_see_message(String string) {
+		//alert
 	}
 
 	@When("Admin Searches for {string}")
 	public void admin_searches_for(String string) {
+		//deleted program name
 	}
 
 	@Then("There should be zero results")
@@ -44,20 +88,18 @@ public class ProgramStep2 {
 
 	@Given("Admin is on Program Confirm Deletion Page after selecting a program to delete")
 	public void admin_is_on_program_confirm_deletion_page_after_selecting_a_program_to_delete() {
-	}
-
-	@Then("Admin can see Confirmation form disappears")
-	public void admin_can_see_confirmation_form_disappears() {
+		
 	}
 
 	@When("Admin click on {string} button")
 	public void admin_click_on_button(String string) {
+		Program2.deleteNo();
 	}
 
 	@Then("Admin can see Confirm Deletion form disappear")
 	public void admin_can_see_confirm_deletion_form_disappear() {
+	Program2.confirmationDialog();
 	}
-
 
 	
 //----------deletemultipleprogram---------

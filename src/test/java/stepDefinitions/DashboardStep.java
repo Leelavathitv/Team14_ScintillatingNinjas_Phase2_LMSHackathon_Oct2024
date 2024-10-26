@@ -1,6 +1,8 @@
 package stepDefinitions;
 
 import org.openqa.selenium.WebDriver;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -15,6 +17,7 @@ public class DashboardStep {
 	DashboardPage dashboard;
 	WebDriver driver;
 	ResourceBundleReader resourceBundleReader;
+	Logger logger= LogManager.getLogger(LoginStep.class);
 	
 	public DashboardStep(TestContext testcontext) {
 		this.testContext = testcontext;
@@ -25,12 +28,12 @@ public class DashboardStep {
 	
 	@Given("Admin is in loginPage")
 	public void admin_is_in_login_page() {
-	   
-	}
+		logger.info("Admin launched the Browser");	   
+	   }
 
 	@When("Admin enters valid credentials and clicks")
 	public void admin_enters_valid_credentials_and_clicks() {
-	  
+	  dashboard.login();
 	}
 
 	@Then("Admin should see dashboard")

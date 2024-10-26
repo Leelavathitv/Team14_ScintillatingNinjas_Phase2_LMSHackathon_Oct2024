@@ -7,11 +7,21 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import utilities.ResourceBundleReader;
 public class Program2Page {
-	
 	WebDriver driver;
-	
+	ResourceBundleReader resourceBundleReader;
+
+	@FindBy(id="username")
+	public WebElement username;
+	@FindBy(id="password")
+	public WebElement password;
+	@FindBy(id="login")
+	public WebElement login;
 	//--------------delete program--------------
+	@FindBy(xpath="(//button[@id='program']/span[1])")
+	public WebElement programModulePage;
 	@FindBy(className="signin-content")
 	public WebElement programClick;
 	@FindBy(xpath="(//button[@class='p-button-rounded p-button-danger p-button p-component p-button-icon-only'])[1]")
@@ -43,6 +53,17 @@ public class Program2Page {
     } else {
         System.out.println("Confirmation dialog is still present.");
     }
+	}
+	
+//	public void login()
+//	{
+//		username.sendKeys("Sdet@gmail.com");
+//		password.sendKeys("LmsHackathon@2024");
+//		login.click();
+//	}
+	public void programModulePage()
+	{
+		programModulePage.click();
 	}
     public void programClick()
     {
@@ -159,5 +180,6 @@ public class Program2Page {
     public Program2Page(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this); // Initialize the elements
+        this.resourceBundleReader = new ResourceBundleReader();
     }
 }

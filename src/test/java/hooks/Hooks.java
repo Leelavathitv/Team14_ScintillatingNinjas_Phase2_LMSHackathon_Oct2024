@@ -25,6 +25,7 @@ public class Hooks {
 	public void setUp() {
 		String browser = System.getProperty("browser","Chrome");
 		driver = DriverManager.initializeDriver(browser);
+		driver.get("https://lms-frontend-hackathon-oct24-173fe394c071.herokuapp.com/login");
 //	System.out.println("*******Driver value in hooks*******" +driver);
 	}
 	

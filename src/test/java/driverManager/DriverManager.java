@@ -38,7 +38,7 @@ static ThreadLocal<WebDriver> driver= new ThreadLocal<WebDriver>();
 	}
 
 	public static WebDriver getDriver() {
-		System.out.println("*************The driver value is *********" +driver);
+//		System.out.println("*************The driver value is *********" +driver);
 		return driver.get();
 	}
 

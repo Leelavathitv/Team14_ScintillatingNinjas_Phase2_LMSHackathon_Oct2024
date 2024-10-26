@@ -2,10 +2,11 @@
 Feature: Manage Program - Delete Program
 
   Background: Admin is on program module after reaching dashboard
-    Given Admin is on Program module
+    Given Admin is on the Program module
     When Admin is logged in successfully and is in program module page
-
+@1
   Scenario: Verify delete feature
+  
     When Admin clicks on delete button for a program
     Then Admin will get confirm deletion popup
 
@@ -21,7 +22,7 @@ Feature: Manage Program - Delete Program
   Scenario: Verify Admin is able to click 'No'
     Given Admin is on Program Confirm Deletion Page after selecting a program to delete
     When Admin clicks on "No" button
-    Then Admin can see Confirmation form disappears
+    Then Admin can see Confirm Deletion form disappear
 
   Scenario: Verify Admin is able to close the window with "X"
     Given Admin is on Program Confirm Deletion Page after selecting a program to delete
