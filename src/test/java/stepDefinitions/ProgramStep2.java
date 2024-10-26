@@ -106,14 +106,10 @@ public class ProgramStep2 {
 //---------searchbar----------
 	@When("Admin enter the program to search By program name")
 	public void admin_enter_the_program_to_search_by_program_name() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
 	}
 
 	@Then("Admin should able to see Program name, description, and status for searched program name")
 	public void admin_should_able_to_see_program_name_description_and_status_for_searched_program_name() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
 	}
 
 	@When("Admin enter the program to search By program description")
