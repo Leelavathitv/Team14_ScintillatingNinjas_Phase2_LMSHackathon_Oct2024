@@ -15,7 +15,7 @@ import io.cucumber.testng.CucumberOptions;
 	    monochrome = true,
 	  
 
-	   tags= "",
+	//  tags= "@BatchPageNavigation",
 	    plugin= {"pretty","html:target/cucumber-reports/cucumber.html",
 	    		//"io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm",
 	    		// "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",

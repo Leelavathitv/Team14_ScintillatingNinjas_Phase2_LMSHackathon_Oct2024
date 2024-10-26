@@ -1,26 +1,38 @@
 package stepDefinitions;
 
+import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
+
+import driverManager.DriverManager;
+import pageObjects.BatchPage;
 import io.cucumber.java.en.*;
+
+import utilities.ConfigFileReader;
+import utilities.LoggerLoad;
 
 public class BatchStep {
 
+	
+	BatchPage batchObj=new BatchPage();
+	//ConfigFileReader configFileReader =  ConfigFileReader.getInstance();
 	//-------------@StackGetStarted @StackTC_001----------
-	@Given("Admin is on the Dashboard Page")
-	public void admin_is_on_the_dashboard_page() {
-	   
-	   
+	@Given("Admin is on the Dashboard Page after Login")
+	public void admin_is_on_the_dashboard_page_after_login() {
+//		LoggerLoad.info("You are in " + driver.getTitle() + " page."); 
 	}
 
 	@When("Admin Clicks on the Batch menu from the header")
 	public void admin_clicks_on_the_batch_menu_from_the_header() {
-	   
+	//	batchObj.clickDashboardBatch();
 	   
 	}
 
 	@Then("Admin should be in the Manage Batch Page")
 	public void admin_should_be_in_the_manage_batch_page() {
 	   
-	   
+		 
+	//	Assert.assertEquals(batchObj.getActualTitle(), configFileReader.getPageTitle("batchPage"));
+	//	LoggerLoad.info("You are viewing the " + driver.getTitle() + " page.");
 	}
 
 	//-----------02----------------------------

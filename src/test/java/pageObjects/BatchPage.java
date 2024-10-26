@@ -7,6 +7,9 @@ import org.openqa.selenium.support.PageFactory;
 
 import driverManager.DriverManager;
 
-public class LoginPage {
-
+public class BatchPage {
+//WebDriver driver= DriverManager.getDriver();
+	
+	
+	
 }
