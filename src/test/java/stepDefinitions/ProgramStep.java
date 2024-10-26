@@ -13,8 +13,10 @@ public class ProgramStep {
 	   
 	}
 
-	@When("Admin clicks {string} on the navigation bar")
-	public void admin_clicks_on_the_navigation_bar(String string) {
+
+	@When("Admin clicks {string} on the navigations bar")
+	public void admin_clicks_on_the_navigations_bar(String string) {
+
 	   
 	}
 
@@ -47,8 +49,10 @@ public class ProgramStep {
 	public void admin_is_on_program_page() {
 	    	}
 
-	@Then("Admin should see sub menu in menu bar as {string}")
-	public void admin_should_see_sub_menu_in_menu_bar_as(String string) {
+
+	@Then("Admin should see sub menu in menu bars as {string}")
+	public void admin_should_see_sub_menu_in_menu_bars_as(String string) {
+
 	   
 	}
 
@@ -97,8 +101,10 @@ public class ProgramStep {
 	    
 	}
 
-	@Then("{string}{string}\".")
-	public void string_string(String string, String string2) {
+
+	@Then("Admin should see the footer as {string}.")
+	public void admin_should_see_the_footer_as(String string) {
+
 	   
 	}
 	
@@ -112,8 +118,10 @@ public class ProgramStep {
 	    
 	}
 
-	@When("Admin clicks on {string} under the {string} menu bar")
-	public void admin_clicks_on_under_the_menu_bar(String string, String string2) {
+
+	@When("Admin clicks on the {string} under the {string} menu bars")
+	public void admin_clicks_on_the_under_the_menu_bars(String string, String string2) {
+
 	   
 	}
 
@@ -219,5 +227,72 @@ public class ProgramStep {
 	    
 	}
 
+
+	@When("Admin can change the status of the program and click on save button")
+	public void admin_can_change_the_status_of_the_program_and_click_on_save_button() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new io.cucumber.java.PendingException();
+	}
+	@Then("Status updated can be viewed by the Admin")
+	public void status_updated_can_be_viewed_by_the_admin() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new io.cucumber.java.PendingException();
+	}
+	
+	@When("Admin searches with newly updated {string}")
+	public void admin_searches_with_newly_updated(String string) {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new io.cucumber.java.PendingException();
+	}
+	@Then("Admin verifies that the details are correctly updated.")
+	public void admin_verifies_that_the_details_are_correctly_updated() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new io.cucumber.java.PendingException();
+	}
+	
+	
+	@When("Admin edits the program name and click on save button")
+	public void admin_edits_the_program_name_and_click_on_save_button() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new io.cucumber.java.PendingException();
+	}
+	@Then("Updated program name is seen by the Admin")
+	public void updated_program_name_is_seen_by_the_admin() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new io.cucumber.java.PendingException();
+	}
+
+	@When("Admin clicks on Edit option for particular program")
+	public void admin_clicks_on_edit_option_for_particular_program() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new io.cucumber.java.PendingException();
+	}
+	@When("Admin edits the description text and click on save button")
+	public void admin_edits_the_description_text_and_click_on_save_button() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new io.cucumber.java.PendingException();
+	}
+	@Then("Admin can see the description is updated")
+	public void admin_can_see_the_description_is_updated() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new io.cucumber.java.PendingException();
+	}
+	
+	@When("Admin click on save button")
+	public void admin_click_on_save_button() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new io.cucumber.java.PendingException();
+	}
+	@Then("Admin can see the updated program details")
+	public void admin_can_see_the_updated_program_details() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new io.cucumber.java.PendingException();
+	}
+	
+	@Then("Admin can see the Program details form disappears")
+	public void admin_can_see_the_program_details_form_disappears() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new io.cucumber.java.PendingException();
+	}
 
 }
