@@ -27,6 +27,8 @@ public class LoginStep {
 		this.dashboard = testcontext.getPageObjectManager().getDashboardPage();
 		this.resourceBundleReader = testcontext.getResourceBundleReader();
 		this.driver = testcontext.getDriverManager().getDriver();
+	
+
 	}
 	
 	@Given("Admin launch the browser")
@@ -165,8 +167,7 @@ public class LoginStep {
 
 	@When("Admin enter valid credentials  and clicks login button")
 	public void admin_enter_valid_credentials_and_clicks_login_button() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	   dashboard.validLogin();
 	}
 
 	@Then("Admin should land on dashboard page \\( centre of the page will be empty , menu bar is present).")

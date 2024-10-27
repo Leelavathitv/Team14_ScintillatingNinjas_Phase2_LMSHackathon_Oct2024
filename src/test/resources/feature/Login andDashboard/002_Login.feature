@@ -3,7 +3,7 @@ Feature: Login Page Verification
 
   Background:
     Given Admin launches the browser
-    And Admin gives the correct LMS portal URL
+    When Admin gives the correct LMS portal URL
 
   Scenario: Verify Admin is able to land on login page
     When Admin gives the correct LMS portal URL
