@@ -18,9 +18,9 @@ public class TestContext {
 		resourceBundleReader = new ResourceBundleReader();
 	}
 	
+	
 	public DriverManager getDriverManager() {
 		return driverManager;
-		
 	}
 	
 	public ResourceBundleReader getResourceBundleReader() {
@@ -30,5 +30,4 @@ public class TestContext {
 	public PageObjectManager getPageObjectManager() {
 		return pageObjectManager;
 	}
-
 }

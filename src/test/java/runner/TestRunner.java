@@ -13,13 +13,13 @@ import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(
 		 features = {"src/test/resources/feature"},
-   glue = {"stepDefinition","hooks"},
+   glue = {"stepDefinitions","hooks"},
    monochrome = true,
 
 	
 
 
-  tags= "",
+  tags= "@BatchPageValidation",
    plugin= {"pretty","html:target/cucumber-reports/cucumber.html",
    		//"io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm",
    		// "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
@@ -28,11 +28,11 @@ import io.cucumber.testng.CucumberOptions;
 
 public class TestRunner extends AbstractTestNGCucumberTests{
 	
-	@BeforeTest
-	@Parameters({"browser"})
-	public void defineBrowser(@Optional ("chrome") String browser) {
-		//ConfigFileReader.setBrowserType(browser);
-	}
+//	@BeforeTest
+//	@Parameters({"browser"})
+//	public void defineBrowser(@Optional ("chrome") String browser) {
+//		//ConfigFileReader.setBrowserType(browser);
+//	}
 	@Override
    @DataProvider(parallel = false)//true means execute parallely false mean not execute parallely
 	

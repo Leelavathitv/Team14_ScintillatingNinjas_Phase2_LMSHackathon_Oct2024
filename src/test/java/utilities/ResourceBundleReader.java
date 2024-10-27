@@ -3,14 +3,15 @@ package utilities;
 import java.util.ResourceBundle;
 
 public class ResourceBundleReader {
+	
 	ResourceBundle resouceBundle = ResourceBundle.getBundle("config/Configuration");
 	
 	public String getUrl() {
-		String url = resouceBundle.getString("homeUrl");
+		String url = resouceBundle.getString("loginUrl");
 		return url;
 	}
 	public String getUserName() {
-		String userName = resouceBundle.getString("username");
+		String userName = getFunctionalityMessage("username");
 		return userName;
 	}
 
@@ -23,4 +24,15 @@ public class ResourceBundleReader {
 		String excelData = resouceBundle.getString("exceldata");
 		return excelData;
 	}
+	
+	public String getPageTitle(String titleName) {
+		String title = resouceBundle.getString(titleName);
+		return title;
+	}
+	
+	public String getFunctionalityMessage(String name) {
+		String batch = resouceBundle.getString(name);
+		return batch;
+	}
+	
 }
