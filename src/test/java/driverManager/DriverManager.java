@@ -32,13 +32,12 @@ static ThreadLocal<WebDriver> driver= new ThreadLocal<WebDriver>();
 		return driverInstance;
 	}
 	
-	public static void setDriver(WebDriver driverInstance) {
+	private static void setDriver(WebDriver driverInstance) {
 		driver.set(driverInstance);
-		
 	}
 
 	public static WebDriver getDriver() {
-		System.out.println("*************The driver value is *********" +driver);
+//		System.out.println("*************The driver value is *********" +driver);
 		return driver.get();
 	}
 
