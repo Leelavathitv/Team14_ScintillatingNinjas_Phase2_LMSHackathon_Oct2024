@@ -59,7 +59,8 @@ public class BatchStep {
 
 	@Then("Admin should see the Manage Batch Heading")
 	public void admin_should_see_the_Manage_Batch_Heading() {
-		Assert.assertEquals(batchObj.getActualTitle(), resourceBundleReader.getPageTitle("pagetitle"));
+		Assert.assertEquals(batchObj.manageBatchgetText(), resourceBundleReader.getFunctionalityMessage("batch"));
+	//	Assert.assertEquals(batchObj.getActualTitle(), resourceBundleReader.getPageTitle("pagetitle"));
 		LoggerLoad.info("You are viewing the " + driver.getTitle() + " page.");
 	   
 	}

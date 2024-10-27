@@ -29,16 +29,16 @@ public class CommonStepDefinitions {
 	
 	}
 	
-//	@Given("The Admin is on the login page of the LMS Portal")
-//	public void the_admin_is_on_the_login_page_of_the_lms_portal() {
-//		LoggerLoad.info("The Admin is on the login page of the LMS Portal");
-//	}
+	@Given("The Admin is on the login page of the LMS Portal")
+	public void the_admin_is_on_the_login_page_of_the_lms_portal() {
+		LoggerLoad.info("The Admin is on the login page of the LMS Portal");
+	}
 	
 	
 	//---- This is coming from the Each Scenario Given -----------
 	
-	@Given("Admin is on the Dashboard Pages")
-	public void admin_is_on_the_dashboard_pages() {
+	@Given("Admin is on the Dashboard Page after Login")
+	public void admin_is_on_the_dashboard_page_after_Login() {
 		LoggerLoad.info("You are in " + driver.getTitle() + " page.");
 		System.out.println("You are in Dashboard Page");
 	}
@@ -52,9 +52,9 @@ public class CommonStepDefinitions {
 		LoggerLoad.info("You are viewing the " + driver.getTitle() + " page.");
 	}
 
-	@Then("Admin should be in the Manage Batch Page")
-	public void admin_should_be_in_the_manage_batch_page() {
-		Assert.assertEquals(batchObj.getActualTitle(), resourceBundleReader.getPageTitle("pagetitle"));
-		 LoggerLoad.info("You are viewing the " + driver.getTitle() + " page.");
-	}
+//	@Then("Admin should be in the Manage Batch Page")
+//	public void admin_should_be_in_the_manage_batch_page() {
+//		Assert.assertEquals(batchObj.getActualTitle(), resourceBundleReader.getPageTitle("pagetitle"));
+//		 LoggerLoad.info("You are viewing the " + driver.getTitle() + " page.");
+//	}
 }
