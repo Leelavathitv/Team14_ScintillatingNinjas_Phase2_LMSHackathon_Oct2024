@@ -1,31 +1,58 @@
 package pageObjects;
 
+import java.time.Duration;
 import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import utilities.ResourceBundleReader;
 public class Program2Page {
 	WebDriver driver;
 	ResourceBundleReader resourceBundleReader;
 
-	@FindBy(id="username")
-	public WebElement username;
-	@FindBy(id="password")
-	public WebElement password;
-	@FindBy(id="login")
-	public WebElement login;
+    public Program2Page(WebDriver driver) {
+    	System.out.println(" Program2Page constructor");
+//    	if (driver == null) {
+//    		System.out.println("Program2Page::WebDriver is null");    		
+//            //throw new IllegalStateException("WebDriver is not initialized");
+//        }    	
+//    	else {this.driver = driver;}
+    	this.driver=driver;
+    	//PageFactory.initElements(this.driver, this); // Initialize the elements
+        this.resourceBundleReader = new ResourceBundleReader();
+    }
+	
+	public void click_element_with_timeout(WebDriver driver, int timeout, String xpath) {
+		
+//		WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(timeout));
+//		WebElement Tryhere = wait1.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Try here>>>")));
+		//Tryhere.click();
+		Actions action = new Actions(this.driver);
+		WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(timeout));
+		WebElement elem_name = wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));	    
+		//action.scrollToElement(elem_name);
+		//action.scrollToElement(elem_name).perform();
+		elem_name.click();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(timeout));
+
+		
+	}
+    
 	//--------------delete program--------------
-	@FindBy(xpath="(//button[@id='program']/span[1])")
-	public WebElement programModulePage;
-	@FindBy(className="signin-content")
-	public WebElement programClick;
-	@FindBy(xpath="(//button[@class='p-button-rounded p-button-danger p-button p-component p-button-icon-only'])[1]")
-	public WebElement deletePgm;
+	@FindBy(xpath = "//button[@id='program']")
+	WebElement pgm;
+	//@FindBy(className="signin-content")
+	@FindBy(xpath = "//button[@id='program']") // Example using XPath
+	WebElement pgmClick;	
+	@FindBy(xpath = "//button[@class='p-button-rounded p-button-danger p-button p-component p-button-icon-only'])[1]")
+	WebElement deletePgm;
 	@FindBy(xpath="//span[text()='Confirm']")
 	public WebElement confirmDeletion;
 	@FindBy(xpath="//div[@class='p-dialog-footer ng-tns-c204-32 ng-star-inserted']//span[contains(@class, 'p-button-label')and text()='Yes']")
@@ -61,17 +88,31 @@ public class Program2Page {
 //		password.sendKeys("LmsHackathon@2024");
 //		login.click();
 //	}
-	public void programModulePage()
-	{
-		programModulePage.click();
+
+	
+	public void programModulePage() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+	    WebElement programModule = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='program']")));
+	    programModule.click();	        
+		//this.click_tryhere_with_timeout(this.driver, 10, programModulePage);
+	    //programModulePage.click();
 	}
+	
     public void programClick()
     {
-    	programClick.click();
+    	//programClick.click();
+        //WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        //WebElement programClick = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//body")));
+        //pgmClick.click();
+        
+        this.click_element_with_timeout(this.driver, 5, "//body");
+	
     }
 	public void deletePgm()
 	{
-		deletePgm.click();
+		
+		this.click_element_with_timeout(this.driver, 30, "//td[contains(text(),'sdetprogram')]//following-sibling::td//button[contains(@id,'deleteProgram')]");
     } 
 	public void searchPgm()
 	{
@@ -177,9 +218,5 @@ public class Program2Page {
 	
 
    
-    public Program2Page(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this); // Initialize the elements
-        this.resourceBundleReader = new ResourceBundleReader();
-    }
+
 }

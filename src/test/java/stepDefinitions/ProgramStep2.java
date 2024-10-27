@@ -13,8 +13,9 @@ import testContext.TestContext;
 import utilities.ResourceBundleReader;
 
 public class ProgramStep2 {
-	Program2Page Program2;
+	
 	TestContext testContext;
+	Program2Page Program2;
 	WebDriver driver;
 	ResourceBundleReader resourceBundleReader;
 	Logger logger= LogManager.getLogger(LoginStep.class);
@@ -27,16 +28,21 @@ public class ProgramStep2 {
 //		this.driver = testcontext.getDriverManager().getDriver();
 //	}
 	
-    @SuppressWarnings("static-access")
+    //@SuppressWarnings("static-access")
 	public ProgramStep2(TestContext testcontext) {
+		logger.info("ProgramStep2 Constuctor called...");
+		System.out.println("ProgramStep2 Constuctor called...");
     	this.testContext = testcontext;
-    	this.dashboard = testcontext.getPageObjectManager().getDashboardPage();
+    	this.dashboard = testcontext.getPageObjectManager().getDashboardPage();    	
+    	this.Program2 =testcontext.getPageObjectManager().getProgram2Page();
     	this.resourceBundleReader = testcontext.getResourceBundleReader();
     	this.driver=testcontext.getDriverManager().getDriver();
-    	if (driver == null) {
-            throw new IllegalStateException("WebDriver is not initialized");
-        }
-        this.Program2 = new Program2Page(driver);
+//    	if (driver == null) {
+//    		logger.info("WebDriver is null");
+//    		System.out.println("ProgramStep2::WebDriver is null");
+//            //throw new IllegalStateException("WebDriver is not initialized");
+//        }
+        //this.Program2 = new Program2Page(driver);
     }
 	
 	@Given("Admin is on the Program module")
@@ -46,8 +52,9 @@ public class ProgramStep2 {
 	}
 
 	@When("Admin is logged in successfully and is in program module page")
-	public void admin_is_on_program_module_after_reaching_dashboard() {
+	public void admin_is_on_program_module_after_reaching_dashboard() {		
 		dashboard.login();
+		logger.info("Admin is logged in successfully and is in program module page");
 		Program2.programModulePage();
 	}
 
@@ -98,7 +105,7 @@ public class ProgramStep2 {
 
 	@Then("Admin can see Confirm Deletion form disappear")
 	public void admin_can_see_confirm_deletion_form_disappear() {
-	Program2.confirmationDialog();
+		Program2.confirmationDialog();
 	}
 
 	

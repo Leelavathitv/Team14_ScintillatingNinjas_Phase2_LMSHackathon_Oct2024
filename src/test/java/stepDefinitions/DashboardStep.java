@@ -20,6 +20,7 @@ public class DashboardStep {
 	Logger logger= LogManager.getLogger(LoginStep.class);
 	
 	public DashboardStep(TestContext testcontext) {
+
 		this.testContext = testcontext;
 		this.dashboard = testcontext.getPageObjectManager().getDashboardPage();
 		this.resourceBundleReader = testcontext.getResourceBundleReader();
