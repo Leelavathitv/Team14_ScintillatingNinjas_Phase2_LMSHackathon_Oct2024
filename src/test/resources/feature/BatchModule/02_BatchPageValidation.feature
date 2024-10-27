@@ -5,12 +5,8 @@ Feature: Batch Page Validation Functionality
     Given The Admin is on the login page of the LMS Portal 
     When Admin enters valid credentials and clicks
 
-<<<<<<< HEAD
-  #Given The User is on the login page
-  #When Admin enter valid credentials  and clicks login button 
-=======
   @BatchPageValidation @BatchvalidTC_1001
->>>>>>> 0e1f9bba7da6cd052492bbb0e61c1f1e97af5b23
+
   Scenario: Validate "Title" in Batch Page
      Given Admin is on the Dashboard Page after Login
     When Admin Clicks on the Batch menu from the header
