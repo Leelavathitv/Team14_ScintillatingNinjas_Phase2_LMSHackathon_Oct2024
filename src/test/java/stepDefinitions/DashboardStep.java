@@ -1,5 +1,11 @@
 package stepDefinitions;
 
+import static org.testng.Assert.assertEquals;
+
+import java.util.Map;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 import io.cucumber.java.en.Given;
@@ -7,6 +13,8 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pageObjects.DashboardPage;
 import testContext.TestContext;
+
+import utilities.ExcelFileReader;
 import utilities.ResourceBundleReader;
 
 public class DashboardStep {
@@ -15,32 +23,40 @@ public class DashboardStep {
 	DashboardPage dashboard;
 	WebDriver driver;
 	ResourceBundleReader resourceBundleReader;
+	ExcelFileReader excelReader;
 	
+	Logger logger= LogManager.getLogger(DashboardStep.class);
+	
+	@SuppressWarnings("static-access")
 	public DashboardStep(TestContext testcontext) {
 		this.testContext = testcontext;
 		this.dashboard = testcontext.getPageObjectManager().getDashboardPage();
 		this.resourceBundleReader = testcontext.getResourceBundleReader();
 		this.driver = testcontext.getDriverManager().getDriver();
+		
+		
 	}
 	
 	@Given("Admin is in loginPage")
 	public void admin_is_in_login_page() {
-	   
+		logger.info("Admin is on the dashboard Page" );
 	}
 
-	@When("Admin enters valid credentials and clicks")
-	public void admin_enters_valid_credentials_and_clicks() {
-	  
+	@When("Admin enters valid credentials from excel {string} and {string} and clicks submit")
+	public void admin_enters_valid_credentials_from_excel_and_and_clicks_submit(String Scenario, String SheetName) throws Exception {
+		 Map<String, String> credentials = ExcelFileReader.getData1(Scenario, SheetName);
+		    dashboard.login(credentials.get("Username"), credentials.get("Password"));
 	}
 
 	@Then("Admin should see dashboard")
 	public void admin_should_see_dashboard() {
-	    
+		assertEquals(dashboard.assertingDashboard(), resourceBundleReader.getHomePageHeader());
 	}
 
+	
 	@Then("Maximum navigation time in milliseconds should default to {int} seconds")
 	public void maximum_navigation_time_in_milliseconds_should_default_to_seconds(Integer int1) {
-	   
+		assertEquals(dashboard.responseTime(), true);
 	}
 
 	@Then("HTTP response should be >= {int} and the link is broken")

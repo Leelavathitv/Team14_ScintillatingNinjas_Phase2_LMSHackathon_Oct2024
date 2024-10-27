@@ -32,7 +32,7 @@ public class ExcelFileReader {
 	public XSSFRow row;
 	public static XSSFCell cell;
 	public CellStyle style;
-	public static ResourceBundleReader resourceBundleReader;
+	static ResourceBundleReader resourceBun = new ResourceBundleReader().getInstance();
 
 	public List<Map<String, String>> getData(String excelFilePath, String sheetName)
 			throws InvalidFormatException, IOException {
@@ -173,7 +173,7 @@ public class ExcelFileReader {
 
 		Map<String, String> dataMap = new HashMap<String, String>();
 		
-		fi = new FileInputStream(resourceBundleReader.getExcel()); 
+		fi = new FileInputStream(resourceBun.getInstance().getExcel()); 
 		
 		workbook = new XSSFWorkbook(fi); 
 		sheet = workbook.getSheet(sheetName); 

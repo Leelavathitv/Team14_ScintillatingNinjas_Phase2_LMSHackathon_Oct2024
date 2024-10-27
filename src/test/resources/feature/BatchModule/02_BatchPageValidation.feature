@@ -4,7 +4,7 @@ Feature: LMS Portal Batch Page Validation Functionality
   Background: Admin is on the Dashboard page after Login
 
   #Given The User is on the login page
-  #When The User enters the valid username and password "LoginCredentials"
+  #When Admin enter valid credentials  and clicks login button 
   Scenario: Validate "Title" in Batch Page
     When Admin Clicks on the Batch menu from the header
     Then Admin should see the "LMS-Learning Management System" Title

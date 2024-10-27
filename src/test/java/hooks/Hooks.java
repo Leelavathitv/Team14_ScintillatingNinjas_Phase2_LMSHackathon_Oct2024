@@ -17,15 +17,20 @@ import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import io.cucumber.java.Status;
 import io.qameta.allure.Allure;
+import testContext.TestContext;
+import utilities.ResourceBundleReader;
 
 public class Hooks {
 
 	WebDriver driver;
+	ResourceBundleReader resourceBun = new ResourceBundleReader().getInstance();
+	
 	@Before
 	public void setUp() {
-		String browser = System.getProperty("browser","Chrome");
-		driver = DriverManager.initializeDriver(browser);
-//	System.out.println("*******Driver value in hooks*******" +driver);
+		
+		driver = DriverManager.getDriver();
+		driver.get(resourceBun.getInstance().getUrl());
+
 	}
 	
 	@After
