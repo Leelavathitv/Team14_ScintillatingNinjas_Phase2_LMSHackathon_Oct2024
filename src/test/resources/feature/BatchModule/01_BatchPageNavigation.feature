@@ -1,11 +1,13 @@
-@BatchNav
+@BatchPageNavigation
 Feature: Batch Page Navigation Functionality
 
   Background: Admin successfully Logged on to the LMS Portal
+ Given Admin launch the browser
+ # Given The Admin is on the login page of the LMS Portal
+   When Admin enters valid credentials and clicks
 
-  #Given The User is on the login page
-  #When The User enters the valid username and password "LoginCredentials"
+  @BatchPageNavigation @BatchNavTC_001
   Scenario: Verify Admin Navigate to Batch page successfully
-    Given Admin is on the Dashboard Page
+   #Given Admin is on the Dashboard Pages
     When Admin Clicks on the Batch menu from the header
-    Then Admin should be in the Manage Batch Page
+   Then Admin should be in the Manage Batch Page

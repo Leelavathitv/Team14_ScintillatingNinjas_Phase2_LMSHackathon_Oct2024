@@ -1,3 +1,4 @@
+
 package runner;
 
 import org.testng.annotations.BeforeTest;
@@ -11,14 +12,14 @@ import io.cucumber.testng.CucumberOptions;
 
 
 @CucumberOptions(
-		 features = {"src/test/resources/feature/Program2/001_DeleteProgram.feature"},
+		 features = {"src/test/resources/feature"},
    glue = {"stepDefinitions","hooks"},
    monochrome = true,
 
 	
 
 
-  tags= "@1",
+  tags= "@BatchPageValidation",
    plugin= {"pretty","html:target/cucumber-reports/cucumber.html",
    		//"io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm",
    		// "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
