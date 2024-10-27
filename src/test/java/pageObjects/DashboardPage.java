@@ -60,6 +60,7 @@ public class DashboardPage {
 		submitBtn.click();
 	}
 
+
 	public boolean responseTime() {
 		
 		
@@ -81,3 +82,6 @@ public class DashboardPage {
 	}
 	
 }
+
+
+

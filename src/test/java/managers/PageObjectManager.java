@@ -2,11 +2,13 @@ package managers;
 
 import org.openqa.selenium.WebDriver;
 
+import pageObjects.BatchPage;
 import pageObjects.DashboardPage;
 
 public class PageObjectManager {
 	WebDriver driver;
 	DashboardPage loginPage;
+	BatchPage batchPage;
 	
 	public  PageObjectManager(WebDriver driver) {
 		this.driver = driver;
@@ -20,5 +22,12 @@ public class PageObjectManager {
 			loginPage = new DashboardPage(driver);
 		}
 		return loginPage;
+	}
+	
+	public BatchPage getBatchPage() {
+		if(batchPage == null) {
+			batchPage = new BatchPage(driver);
+		}
+		return batchPage;
 	}
 }
