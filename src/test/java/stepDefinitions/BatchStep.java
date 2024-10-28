@@ -19,7 +19,7 @@ import utilities.ResourceBundleReader;
 public class BatchStep {
 
 	TestContext testContext;
-	//DashboardPage dashboard;
+	DashboardPage dashObj;
 	BatchPage batchObj;
 	WebDriver driver;
 	ResourceBundleReader resourceBundleReader;
@@ -27,6 +27,7 @@ public class BatchStep {
 
 	public BatchStep(TestContext testcontext) {
 		this.testContext = testcontext;
+		this.dashObj = testcontext.getPageObjectManager().getDashboardPage();
 		this.batchObj = testcontext.getPageObjectManager().getBatchPage();
 		this.resourceBundleReader = testcontext.getResourceBundleReader();
 		this.driver = testcontext.getDriverManager().getDriver();
@@ -47,9 +48,14 @@ public class BatchStep {
 
 	}
 
+	@Then("Admin should be in the Manage Batch Page")
+	public void admin_should_be_in_the_manage_batch_page() {
+		Assert.assertEquals(batchObj.getActualTitle(), resourceBundleReader.getPageTitle("pagetitle"));
+		LoggerLoad.info("You are viewing the " + driver.getTitle() + " page.");
+	}
+
 //	
 
-	
 //	@Given("The Admin is on the login page of the LMS Portal")
 //	public void the_admin_is_on_the_login_page_of_the_lms_portal() {
 //	    // Write code here that turns the phrase above into concrete actions
@@ -59,38 +65,37 @@ public class BatchStep {
 
 	@Then("Admin should see the Manage Batch Heading")
 	public void admin_should_see_the_Manage_Batch_Heading() {
-		Assert.assertEquals(batchObj.getActualTitle(), resourceBundleReader.getPageTitle("pagetitle"));
+		Assert.assertEquals(batchObj.manageBatchgetText(), resourceBundleReader.getFunctionalityMessage("batch"));
 		LoggerLoad.info("You are viewing the " + driver.getTitle() + " page.");
-	   
 	}
 
-
-	@Then("Admin should see the disabled Delete Icon under the header")
-	public void admin_should_see_the_disabled_delete_icon_under_the_header() {
-		
-		Assert.assertTrue(batchObj.deleteIconIsDisabled(),"Delete Icon in Manage Batch is Enabled");
-		LoggerLoad.info("Manage Batch Delete Icon is Disabled = " +batchObj.deleteIconIsDisabled());
-	}
-	
 	@Then("Admin should see the enabled pagination controls under the data table")
 	public void admin_should_see_the_enabled_pagination_controls_under_the_data_table() {
-		Assert.assertTrue(batchObj.isPaginationEnabled(),"Pagination in Batch Page is not Enabled");
-		LoggerLoad.info("Pagination in Batch Page is Enabled = " +batchObj.isPaginationEnabled());
-	   
+		Assert.assertTrue(batchObj.isPaginationEnabled(), "Pagination in Batch Page is not Enabled");
+		LoggerLoad.info("Pagination in Batch Page is Enabled = " + batchObj.isPaginationEnabled());
+
 	}
+
 	@Then("Admin should see the edit icon in each row")
 	public void admin_should_see_the_edit_icon_in_each_row() {
-
+		Assert.assertTrue(batchObj.editIconEnable(), "Edit Icon in Batch Page is not Enabled");
+		LoggerLoad.info("Edit Icon in Batch Page is Enabled = " + batchObj.editIconEnable());
 	}
 
 	@Then("Admin should see the delete icon in each row")
 	public void admin_should_see_the_delete_icon_in_each_row() {
-
+		Assert.assertTrue(batchObj.deleteIconEnable(), "Delete Icon in Batch Page is not Enabled");
+		LoggerLoad.info("Delete Icon in Batch Page is Enabled = " + batchObj.deleteIconEnable());
 	}
 
-	@Then("Admin should the checkbox in each row")
-	public void admin_should_the_checkbox_in_each_row() {
+	@Then("Admin should the see checkbox in each row")
+	public void admin_should_the_see_checkbox_in_each_row() {
 
+		// Assert.assertTrue(batchObj.checkboxClickable(),""
+		// Assert.asertE(batchObj.checkboxClickable(), "In Batch page Checkbox in each
+		// row is not Clickable");
+		// LoggerLoad.info("Edit Icon in Batch Page is Enabled = " +
+		// batchObj.checkboxClickable());
 	}
 
 	@Then("Admin should see the datatable headers Batch name, Batch Description,Batch Status, No Of classes, Program Name, Edit\\/Delete")
@@ -109,28 +114,53 @@ public class BatchStep {
 	}
 
 //-------------03-------------------------------------
-	@When("Admin clicks {string} on the navigation bar")
-	public void admin_clicks_on_the_navigation_bar(String string) {
 
+	@When("Admin is on the Batch page after login successful")
+	public void admin_is_on_the_Batch_page_after_login_successful() {
+		dashObj.login();
+		batchObj.clickDashboardBatch();
 	}
 
-	@Then("Admin should see sub menu in menu bar as {string}")
-	public void admin_should_see_sub_menu_in_menu_bar_as(String string) {
-
+	@Given("Admin is on the Batch page")
+	public void admin_is_on_the_batch_page() {
+		LoggerLoad.info("The Admin is on the login page of the LMS Portal");
 	}
 
-	@When("Admin clicks on {string} under the {string} menu bar")
-	public void admin_clicks_on_under_the_menu_bar(String string, String string2) {
+	@When("Admin clicks Batch on the navigation bar")
+	public void admin_clicks_batch_on_the_navigation_bar() {
 
+		batchObj.clickaddNewBatch();
+	}
+
+	@Then("Admin should see sub menu in menu bar as Add New Batch")
+	public void admin_should_see_sub_menu_in_menu_bar_as_add_new_batch() {
+		// Assert.assertTrue(batchObj.clickaddNewBatch(),"Not able to see Add new batch
+		// and clickable");
+		Assert.assertEquals(batchObj.getTextNewBatch(), resourceBundleReader.getFunctionalityMessage("addNewBatch"));
+	}
+
+	@When("Admin clicks on Add New batch under the batch menu bar")
+	public void admin_clicks_on_add_new_batch_under_the_batch_menu_bar() {
+
+		batchObj.clickaddNewBatch();
 	}
 
 //duplicate in 03 last then
 	@Then("Admin should see the Batch Details pop up window")
 	public void admin_should_see_the_batch_details_pop_up_window() {
 
+		Assert.assertEquals(batchObj.getTextNewBatch(), resourceBundleReader.getFunctionalityMessage("addNewBatch"));
 	}
 
 //----------------------04------------------------------
+
+	@When("Admin is on the Add new batch pop up in batch after Login")
+	public void admin_is_on_the_add_new_batch_pop_up_in_batch_after_login() {
+		dashObj.login();
+		batchObj.clickDashboardBatch();
+		batchObj.clickaddNewBatch();	
+	}
+
 	@When("Admin checks all the fields are enabled")
 	public void admin_checks_all_the_fields_are_enabled() {
 

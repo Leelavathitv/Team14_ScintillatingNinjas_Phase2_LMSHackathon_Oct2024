@@ -12,23 +12,26 @@ import io.cucumber.testng.CucumberOptions;
 
 
 @CucumberOptions(
+
 		 features = {"src/test/resources/feature"},
-   glue = {"stepDefinitions","hooks"},
+   glue = {"stepDefinitions","hooks","utilities"},
+
    monochrome = true,
 
 	
 
 
-  tags= "@BatchPageValidation",
+  tags= "@NewBatchPopUp",
    plugin= {"pretty","html:target/cucumber-reports/cucumber.html",
-   		//"io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm",
-   		// "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
-   		// "rerun:target/rerun.txt",
+   		"io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm",
+   		 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
+   		 "rerun:target/rerun.txt",
    		})
 
 public class TestRunner extends AbstractTestNGCucumberTests{
 	
-//	@BeforeTest
+
+
 //	@Parameters({"browser"})
 //	public void defineBrowser(@Optional ("chrome") String browser) {
 //		//ConfigFileReader.setBrowserType(browser);

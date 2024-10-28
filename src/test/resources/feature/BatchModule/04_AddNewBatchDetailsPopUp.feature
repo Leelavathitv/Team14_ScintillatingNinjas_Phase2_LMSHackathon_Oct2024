@@ -2,7 +2,10 @@
 Feature: Add New Batch details pop up
 
   Background: Admin is on the Add new batch pop up
-
+    Given The Admin is on the login page of the LMS Portal
+    When Admin is on the Add new batch pop up in batch after Login
+    
+    
   Scenario: Validate all the fields exist in pop up
     When Admin checks all the fields are enabled
     Then The pop up should include the fields Batch Name,Number of classes and Description as text box,Program Name as drop down Status as radio button
