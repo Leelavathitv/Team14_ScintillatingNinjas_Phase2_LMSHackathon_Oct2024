@@ -1,69 +1,65 @@
-
 @BatchPageValidation
 Feature: Batch Page Validation Functionality
 
   Background: Admin successfully Logged on to the LMS Portal
-    Given The Admin is on the login page of the LMS Portal 
+    Given The Admin is on the login page of the LMS Portal
     When Admin enters valid credentials and clicks Login
 
-  @BatchPageValidation @BatchvalidTC_1001
+  @BatchTitle @BatchvalidTC_1001
   Scenario: Validate Title in Batch Page
-     Given Admin is on the Dashboard Page after Login
+    Given Admin is on the Dashboard Page after Login
     When Admin Clicks on the Batch menu from the header
     Then Admin should see the LMS Learning Management Systems Title
 
-  
-  
-    @BatchPageValidation @BatchvalidTC_1002
+  @BatchManageValid @BatchvalidTC_1002
   Scenario: Validate heading in the Batch Page
     Given Admin is on the Dashboard Page after Login
     When Admin Clicks on the Batch menu from the header
     Then Admin should see the Manage Batch Heading
 
-  @BatchPageValidation @BatchvalidTC_1003
+  @BatchDeleteDisable @BatchvalidTC_1003
   Scenario: Validate disabled Delete Icon under the header in the Batch Page
     Given Admin is on the Dashboard Page after Login
     When Admin Clicks on the Batch menu from the header
-     Then Admin should see the disabled Delete Icon under the header
-#common 
-  @BatchPageValidation @BatchvalidTC_004
+    Then Admin should see the disabled Delete Icon under the header
+
+  @BatchPagination @BatchvalidTC_1004
   Scenario: Validate pagination in the Batch Page
     Given Admin is on the Dashboard Page after Login
     When Admin Clicks on the Batch menu from the header
     Then Admin should see the enabled pagination controls under the data table
 
-  @BatchPageValidation @BatchvalidTC_005
+  @BatchEditIcon @BatchvalidTC_1005
   Scenario: Validate edit icon in each data rows
     Given Admin is on the Dashboard Page after Login
     When Admin Clicks on the Batch menu from the header
     Then Admin should see the edit icon in each row
 
-  @BatchPageValidation @BatchvalidTC_006
+  @BatchDeleteIcon @BatchvalidTC_1006
   Scenario: Validate delete icon in each data rows
     Given Admin is on the Dashboard Page after Login
     When Admin Clicks on the Batch menu from the header
     Then Admin should see the delete icon in each row
 
-  @BatchPageValidation @BatchvalidTC_007
+  @BatchRowCheckbox @BatchvalidTC_1007
   Scenario: Validate checkbox in each data rows
     Given Admin is on the Dashboard Page after Login
     When Admin Clicks on the Batch menu from the header
     Then Admin should see the checkbox in each row
 
-  @BatchPageValidation @BatchvalidTC_008
+  @BatchHeaderNames @BatchvalidTC_1008
   Scenario: Validate Datatable headers
-    Given Admin is on the Dashboard Page after Login  
-     ## not complete
+    Given Admin is on the Dashboard Page after Login
     When Admin Clicks on the Batch menu from the header
     Then Admin should see the datatable headers Batch name, Batch Description,Batch Status, No Of classes, Program Name, Edit/Delete
 
-  @BatchPageValidation @BatchvalidTC_009
+  @BatchHeaderCheckbox @BatchvalidTC_1009
   Scenario: Validate "Checkbox" in the Datatable header row
     Given Admin is on the Dashboard Page after Login
     When Admin Clicks on the Batch menu from the header
-    Then Admin should see the checkbox  in the datatable header row
+    Then Admin should see the checkbox in the datatable header row
 
-  @BatchPageValidation @BatchvalidTC_010
+  @BatchSortIcon @BatchvalidTC_1010
   Scenario: Validate "sort icon" next to all the datatable header
     Given Admin is on the Dashboard Page after Login
     When Admin Clicks on the Batch menu from the header

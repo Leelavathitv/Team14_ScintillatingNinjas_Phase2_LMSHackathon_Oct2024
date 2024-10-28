@@ -1,42 +1,94 @@
+
 package pageObjects;
 
+import java.time.Duration;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.concurrent.TimeoutException;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import utilities.ResourceBundleReader;
 public class Program2Page {
-	
 	WebDriver driver;
+	ResourceBundleReader resourceBundleReader;
+
+	public Program2Page(WebDriver driver) {
+		this.driver = driver;
+		PageFactory.initElements(this.driver, this);
+		this.resourceBundleReader = new ResourceBundleReader();
+	}
+
 	
+   
 	//--------------delete program--------------
-	@FindBy(className="signin-content")
-	public WebElement programClick;
-	@FindBy(xpath="(//button[@class='p-button-rounded p-button-danger p-button p-component p-button-icon-only'])[1]")
-	public WebElement deletePgm;
+	@FindBy(xpath = "//button[@id='program']")
+	WebElement pgm;
+	//@FindBy(className="signin-content")
+	@FindBy(xpath = "//body") // Example using XPath
+	WebElement pgmClickOutside;	
+	@FindBy(xpath = "(//span[contains(@class,'trash')]//parent::button)[1]")
+	WebElement deleteMultiple;
 	@FindBy(xpath="//span[text()='Confirm']")
 	public WebElement confirmDeletion;
-	@FindBy(xpath="//div[@class='p-dialog-footer ng-tns-c204-32 ng-star-inserted']//span[contains(@class, 'p-button-label')and text()='Yes']")
+	@FindBy(xpath="//span[text()='Yes']//parent::button")
 	public WebElement deleteYes;
+	
+	
+    @FindBy(xpath = "//div[contains(@class,'toast-summary')]")
+    private WebElement deletedMsgToastSummary;
+
+    @FindBy(xpath = "//div[contains(@class,'toast-detail')]")
+    private WebElement deletedMsgToastDetail;
+	
 	@FindBy(id="filterGlobal") 
 	public WebElement searchPgm;
-	@FindBy(className="p-paginator-current ng-star-inserted")
-	public WebElement zeroResult;
+//	@FindBy(className="p-paginator-current ng-star-inserted")
+//	public WebElement zeroResult;
 	@FindBy(xpath="//div[@class='p-checkbox-box p-component'][1]")
 	public WebElement checkDeletion;
-	@FindBy(xpath="//div[@class='p-dialog-footer ng-tns-c204-32 ng-star-inserted']//span[contains(@class, 'p-button-label')and text()='No']")
+	@FindBy(xpath="//span[text()='No']//parent::button")
 	public WebElement deleteNo;
-	@FindBy(className="ng-tns-c204-32 p-dialog-header-icon p-dialog-header-close p-link ng-star-inserted")
-	public WebElement clickX;
-	@FindBy(className="p-dialog-header ng-tns-c204-32 ng-star-inserted")
-	public WebElement confirmDialog; 
+	@FindBy(xpath="//button[contains(@class, 'dialog-header-close')]")
+	public WebElement clickXtoClose;
+//	@FindBy(className="p-dialog-header ng-tns-c204-32 ng-star-inserted")
+//	public WebElement confirmDialog; 
+
+	public void click_element_with_timeout(WebDriver driver, int timeout, String xpath) {
+		
+		Actions action = new Actions(this.driver);
+		WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(timeout));
+		WebElement elem_name = wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));	    
+		elem_name.click();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(timeout));
+
+	}
+
+    public boolean checkConfirmDeletion() {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+            wait.until(ExpectedConditions.visibilityOf(confirmDeletion));
+            return confirmDeletion.isDisplayed();
+        } catch (Exception e) {
+            // Handle any exceptions (e.g., NoSuchElementException, TimeoutException)
+            return false;
+        }
+    }
 	
 	public void confirmationDialog()
 	{
     // Validate that the confirmation dialog is no longer visible
-    boolean isDialogPresent = driver.findElements(By.className("p-dialog-header ng-tns-c204-32 ng-star-inserted")).size() > 0 ;
+    boolean isDialogPresent = driver.findElements(By.xpath("//span[text()='Confirm']")).size() == 0 ;
 
     if (!isDialogPresent) {
         System.out.println("Confirmation dialog has disappeared.");
@@ -44,14 +96,169 @@ public class Program2Page {
         System.out.println("Confirmation dialog is still present.");
     }
 	}
-    public void programClick()
-    {
-    	programClick.click();
-    }
-	public void deletePgm()
-	{
-		deletePgm.click();
+	
+	
+	public void openMenu() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+	    WebElement programModule = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='program']")));
+	    programModule.click();	    
+	}
+	
+	public void closeMenu() {
+		pgmClickOutside.click(); // click body, to close program menu.
+	}
+	
+
+	public void clickSingleDelete(String programName)
+	{		
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+	    WebElement deleteButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[text()='"+ programName +"']/following-sibling::td/div/span/button[contains(@id,'deleteProgram')]")));
+	    deleteButton.click();		
     } 
+
+	public void searchSingleProgramWithName(String programName) {
+	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        try {
+        	searchPgm.sendKeys(programName);       	
+        } catch (NoSuchElementException e) {
+        	System.out.println("Program not found: " + programName);
+
+        } catch (Exception e) {
+            System.out.println("An error occurred while trying to delete " + programName + ": " + e.getMessage());
+
+        }
+	    
+	}
+
+	public boolean isSearchSuccessful(String programName) {
+	    try {	        
+	        // Wait for the specific element to be present
+	        boolean noSearchData = driver.findElements(By.xpath("//td[text()='" + programName + "']/following-sibling::td/div/span/button[contains(@id,'deleteProgram')]")).size() == 0 ;
+	        System.out.println("results for the program: " + noSearchData);
+	        return noSearchData;
+	    } catch (NoSuchElementException e) {
+	        // This exception will also indicate that the element is not found
+	        System.out.println("Zero results found for the program: " + programName);
+	        return false; // Return false if the button is not found
+	    }
+	}
+
+	
+	public void deleteSingleProgramWithName(String programName) {
+	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        try {
+        	searchPgm.sendKeys(programName);        	
+            this.clickSingleDelete(programName); // deleting the appropriate program one at a time.        
+        } catch (NoSuchElementException e) {
+        	System.out.println("Program not found: " + programName);
+        } catch (Exception e) {
+            System.out.println("An error occurred while trying to delete " + programName + ": " + e.getMessage());
+        }	       
+	    
+	}
+
+	public void deleteMultipleProgramsWithName(String[] programNames) {
+	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+	    
+	    for (String programName : programNames) {
+	        try {
+	        	searchPgm.sendKeys(programName);	        	
+	            // Locate the delete button for the program based on its name
+	            WebElement selectProgram = wait.until(ExpectedConditions.elementToBeClickable(
+	                By.xpath("//td[text()='" + programName + "']/preceding-sibling::td//div")
+	            ));
+	            selectProgram.click();	            
+	            
+	            //searchPgm.clear(); // clear is not clearing the form.
+	            // Select all text with Ctrl+A and then delete
+	            searchPgm.sendKeys(Keys.CONTROL, "a"); // For Windows/Linux
+	            // searchPgm.sendKeys(Keys.COMMAND, "a"); // For Mac
+	            searchPgm.sendKeys(Keys.DELETE);
+
+	            // Wait until the input field is empty
+	            WebDriverWait waitForNewSearch = new WebDriverWait(driver, Duration.ofSeconds(10));
+	            waitForNewSearch.until(ExpectedConditions.textToBePresentInElementValue(searchPgm, ""));
+	            
+	        } catch (NoSuchElementException e) {
+	        	System.out.println("Program not found: " + programName);
+	        } catch (Exception e) {
+	            System.out.println("An error occurred while trying to delete " + programName + ": " + e.getMessage());
+	        }	       
+	    }
+	    deleteMultiple.click();
+	}
+
+	
+	
+	public void confirmDeletionYes()
+	{
+		 deleteYes.click();
+	}
+
+	public void confirmDeletionNo()
+	{
+		 deleteNo.click();
+         try {
+             Thread.sleep(100); // Wait for 100 milliseconds (adjust as needed, sometimes browser is slow to respond.)
+         } catch (InterruptedException e) {
+             e.printStackTrace();
+         }  
+	}
+
+	public void confirmDeletionClickClose()
+	{
+		clickXtoClose.click();
+        try {
+            Thread.sleep(100); // Wait for 100 milliseconds (adjust as needed, sometimes browser is slow to respond.)
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }  
+	}
+
+	
+	public boolean isAlertPresent(WebDriver driver, Duration timeout) {
+	    try {
+	        // Create a WebDriverWait instance with Duration
+	        WebDriverWait wait = new WebDriverWait(driver, timeout);
+	        
+	        // Wait until an alert is present
+	        wait.until(ExpectedConditions.alertIsPresent());
+	        
+	        // If alert is present, switch to it
+	        driver.switchTo().alert();
+	        return true;
+	    } catch (NoAlertPresentException e) {
+	        return false;
+	    }
+	}
+	
+    public boolean isProrgramDeleted() {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+            wait.until(ExpectedConditions.visibilityOf(deletedMsgToastSummary));
+            wait.until(ExpectedConditions.visibilityOf(deletedMsgToastDetail));
+            
+            return deletedMsgToastSummary.getText().equals("Successful") && 
+            		(deletedMsgToastDetail.getText().equals("Program Deleted") || deletedMsgToastDetail.getText().equals("Programs Deleted"));
+        } catch (Exception e) {
+            return false; // Handle exceptions (e.g., element not found, timeout)
+        }
+    }
+	
+    public String  isProgramDeletedSuccessfully() {
+        if (isProrgramDeleted()) {
+            return "Successful Program Deleted";
+        } else {
+            return "Program Deletion Failed";
+        }
+    }
+    
+	public void deleteNo()
+	{
+		deleteNo.click();
+	}
+	
 	public void searchPgm()
 	{
 		searchPgm.click();
@@ -60,18 +267,11 @@ public class Program2Page {
 	{
 		checkDeletion.click();
 	}
-	public void deleteYes()
-	{
-		 deleteYes.click();
-	}
-	public void deleteNo()
-	{
-		deleteNo.click();
-	}
-	public void clickX()
-	{
-		clickX.click();
-	}
+	
+//	public void clickX()
+//	{
+//		clickX.click();
+//	}
 	//-----------------Delete Multiple Program-----------
 	
 	@FindBy(xpath="//span[@class='p-button-icon pi pi-trash'][1]")
@@ -156,8 +356,5 @@ public class Program2Page {
 	
 
    
-    public Program2Page(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this); // Initialize the elements
-    }
+
 }

@@ -21,7 +21,8 @@ import io.cucumber.testng.CucumberOptions;
 	
 
 
-  tags= "@NewBatchPopUp",
+//  tags= "@BatchPageValidation",
+		   tags= "@BatchPageNavigation or @AddNewBatch or @BatchPageValidation",
    plugin= {"pretty","html:target/cucumber-reports/cucumber.html",
    		"io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm",
    		 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
@@ -37,7 +38,7 @@ public class TestRunner extends AbstractTestNGCucumberTests{
 //		//ConfigFileReader.setBrowserType(browser);
 //	}
 	@Override
-   @DataProvider(parallel = false)//true means execute parallely false mean not execute parallely
+   @DataProvider(parallel = true)//true means execute parallely false mean not execute parallely
 	
    public Object[][] scenarios() {
 				

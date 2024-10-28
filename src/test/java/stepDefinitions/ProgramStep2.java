@@ -1,106 +1,138 @@
 package stepDefinitions;
 
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.expectThrows;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
+
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pageObjects.DashboardPage;
+import pageObjects.Program2Page;
+import testContext.TestContext;
+import utilities.ResourceBundleReader;
 
 public class ProgramStep2 {
 	
+	TestContext testContext;
+	Program2Page ProgramModule;
+	WebDriver driver;
+	ResourceBundleReader resourceBundleReader;
+	Logger logger= LogManager.getLogger(LoginStep.class);
+	DashboardPage dashboard;
+
+	public ProgramStep2(TestContext testcontext) {
+    	this.testContext = testcontext;    	
+    	this.ProgramModule =testcontext.getPageObjectManager().getProgram2Page();
+    	this.resourceBundleReader = testcontext.getResourceBundleReader();
+    	this.driver=testcontext.getDriverManager().getDriver();
+    	this.dashboard =testcontext.getPageObjectManager().getDashboardPage();
+    }
+	
 	@Given("Admin is on the Program module")
 	public void admin_is_on_the_program_module() {
+		//driver.get("https://lms-frontend-hackathon-oct24-173fe394c071.herokuapp.com/login");
+		//logger.info("admin is in program module page");
 	}
 
 	@When("Admin is logged in successfully and is in program module page")
 	public void admin_is_on_program_module_after_reaching_dashboard() {
+		dashboard.login();
+		ProgramModule.openMenu();
+		ProgramModule.closeMenu();
 	}
 
-	@When("Admin clicks on delete button for a program")
-	public void admin_clicks_on_delete_button_for_a_program() {
+	@When("Admin clicks on delete button for a program {string}")
+	public void admin_clicks_on_delete_button_for_a_program(String ProgramName) {	
+		ProgramModule.deleteSingleProgramWithName(ProgramName);
 	}
 
 	@Then("Admin will get confirm deletion popup")
 	public void admin_will_get_confirm_deletion_popup() {
+		//Assert -  if the popup is present, test will pass, and if it's not, the test will fail as intended.	
+		 Assert.assertTrue(ProgramModule.checkConfirmDeletion());
 	}
 
-	@Given("Admin is on Confirm deletion form")
-	public void admin_is_on_confirm_deletion_form() {
+	@Given("Admin is on Confirm deletion form for program {string}")
+	public void admin_is_on_confirm_deletion_form_for_program(String programName) {
+		ProgramModule.deleteSingleProgramWithName(programName);
 	}
 
-	@When("Admin clicks on {string} button")
-	public void admin_clicks_on_button(String string) {
+	@When("Admin clicks on Yes button")
+	public void admin_clicks_on_yes_button() {	
+		ProgramModule.confirmDeletionYes();
 	}
+	
 
 	@Then("Admin can see {string} message")
 	public void admin_can_see_message(String string) {
+		Assert.assertEquals(ProgramModule.isProgramDeletedSuccessfully(), string);
 	}
 
 	@When("Admin Searches for {string}")
-	public void admin_searches_for(String string) {
+	public void admin_searches_for(String programName) {		
+		ProgramModule.searchSingleProgramWithName(programName);
 	}
 
-	@Then("There should be zero results")
-	public void there_should_be_zero_results() {
+	@Then("There should be zero results for {string}")
+	public void there_should_be_zero_results(String programName) {
+ 	    boolean zeroData = ProgramModule.isSearchSuccessful(programName);
+	    Assert.assertTrue(zeroData, "Expected no results, but found a program: " + programName);		
+	}
+	
+
+	@Given("Admin is on Program Confirm Deletion Page after selecting a program to delete {string}")
+	public void admin_is_on_program_confirm_deletion_page_after_selecting_a_program_to_delete(String programName) {
+		ProgramModule.deleteSingleProgramWithName(programName);	
+		ProgramModule.checkConfirmDeletion();
 	}
 
-	@Given("Admin is on Program Confirm Deletion Page after selecting a program to delete")
-	public void admin_is_on_program_confirm_deletion_page_after_selecting_a_program_to_delete() {
-	}
-
-	@Then("Admin can see Confirmation form disappears")
-	public void admin_can_see_confirmation_form_disappears() {
-	}
-
-	@When("Admin click on {string} button")
-	public void admin_click_on_button(String string) {
+	@When("Admin clicks on No button")
+	public void admin_clicks_on_no_button() {
+		ProgramModule.confirmDeletionNo();		
 	}
 
 	@Then("Admin can see Confirm Deletion form disappear")
 	public void admin_can_see_confirm_deletion_form_disappear() {
+		boolean isConfirmDialog = ProgramModule.checkConfirmDeletion();
+		
+		Assert.assertFalse(isConfirmDialog, "Expected no confirmDialog, but found a Confirmation: ");
 	}
 
-
+	
+	@When("Admin clicks on X button")
+	public void admin_clicks_on_X_button() {
+		ProgramModule.confirmDeletionClickClose();		
+	}
 	
 //----------deletemultipleprogram---------
 	@When("Admin selects more than one program by clicking on the checkbox")
 	public void admin_selects_more_than_one_program_by_clicking_on_the_checkbox() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		
 	}
 
 	@Then("Programs get selected")
 	public void programs_get_selected() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
 	}
 
 	@When("Admin clicks on the delete button on the left top of the program page")
 	public void admin_clicks_on_the_delete_button_on_the_left_top_of_the_program_page() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
 	}
 
 	@Then("Admin lands on Confirmation form")
 	public void admin_lands_on_confirmation_form() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
 	}
 
 	@Given("Admin is on Confirmation form")
 	public void admin_is_on_confirmation_form() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
 	}
-
-//	@Then("There should be zero results")
-//	public void there_should_be_zero_results() {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new io.cucumber.java.PendingException();
-//	}
 
 	@Then("Admin can see Programs are still selected and not deleted")
 	public void admin_can_see_programs_are_still_selected_and_not_deleted() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
 	}
 
 //---------searchbar----------
@@ -114,46 +146,32 @@ public class ProgramStep2 {
 
 	@When("Admin enter the program to search By program description")
 	public void admin_enter_the_program_to_search_by_program_description() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
 	}
 
 	@Then("Admin should able to see Program name, description, and status for searched program description")
 	public void admin_should_able_to_see_program_name_description_and_status_for_searched_program_description() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
 	}
 
 	@When("Admin enter the program to search By program name that does not exist")
 	public void admin_enter_the_program_to_search_by_program_name_that_does_not_exist() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
 	}
 
 	@When("Admin enter the program to search By partial name of program")
 	public void admin_enter_the_program_to_search_by_partial_name_of_program() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
 	}
 
 
 //-------Sorting---------
 	@When("Admin clicks on Arrow next to program Name")
 	public void admin_clicks_on_arrow_next_to_program_name() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
 	}
 
 	@Then("Admin See the Program Name is sorted in Ascending order\\/Descending order")
 	public void admin_see_the_program_name_is_sorted_in_ascending_order_descending_order() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
 	}
 
 	@When("Admin clicks on Arrow next to Program Description")
 	public void admin_clicks_on_arrow_next_to_program_description() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
 	}
 
 	@Then("Admin See the program Description is sorted in Ascending order\\/Descending order")
