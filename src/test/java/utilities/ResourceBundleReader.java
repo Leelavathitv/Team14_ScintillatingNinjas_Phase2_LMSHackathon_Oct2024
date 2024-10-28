@@ -35,4 +35,15 @@ public class ResourceBundleReader {
 		return batch;
 	}
 	
+	public String getProgramDeleteConfirm(String titleName) {
+		String title = resouceBundle.getString(titleName);
+		return title;
+	}
+
+//	public String getSuccessfulProgramDeleted(String titleName) {
+//		String title = resouceBundle.getString(titleName);
+//		return title;
+//	}
+
+	
 }
