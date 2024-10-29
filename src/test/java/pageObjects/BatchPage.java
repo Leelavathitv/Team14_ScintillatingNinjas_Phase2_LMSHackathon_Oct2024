@@ -81,6 +81,11 @@ public class BatchPage {
 		}
 		driver.navigate().to("https://lms-frontend-hackathon-oct24-173fe394c071.herokuapp.com/");
 	}
+
+	public String CheckboxesPresentEachRow() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 }

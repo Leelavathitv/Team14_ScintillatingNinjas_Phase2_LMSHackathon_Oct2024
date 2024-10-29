@@ -15,13 +15,16 @@ import io.cucumber.testng.CucumberOptions;
 
 		 features = {"src/test/resources/feature"},
    glue = {"stepDefinitions","hooks","utilities"},
+<<<<<<< HEAD
 
+=======
+>>>>>>> leela
    monochrome = true,
 
 	
 
 
-  tags= "@BatchPageValidation",
+  tags= "@DashboardPage",
    plugin= {"pretty","html:target/cucumber-reports/cucumber.html",
    		"io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm",
    		 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
@@ -37,7 +40,7 @@ public class TestRunner extends AbstractTestNGCucumberTests{
 //		//ConfigFileReader.setBrowserType(browser);
 //	}
 	@Override
-   @DataProvider(parallel = false)//true means execute parallely false mean not execute parallely
+   @DataProvider(parallel = true)//true means execute parallely false mean not execute parallely
 	
    public Object[][] scenarios() {
 				

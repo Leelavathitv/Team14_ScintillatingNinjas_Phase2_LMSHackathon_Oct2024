@@ -10,6 +10,6 @@
 
 /test-output/
 /allure-results/
-
+/src/test/resources/Screenshot/*
 
 
