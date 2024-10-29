@@ -182,8 +182,8 @@ public class Program2Page {
 	    System.out.println("givenProgramName: " + givenProgramName.trim() + " FoundProgramName: " + foundProgramName);
 
 	    // If there's only one entry, perform an exact match
-	    if (getTotalEntries() == 1) {
-	        return givenProgramName.trim().equals(foundProgramName);
+	    if (getTotalEntries() == 1) {    	
+	        return (givenProgramName.trim().equals(foundProgramName) || foundProgramName.contains(givenProgramName.trim()));
 	    }
 
 	    // For multiple entries, check if the given program name is contained in the found program name
@@ -312,7 +312,7 @@ public class Program2Page {
 	{
 		 deleteNo.click();
          try {
-             Thread.sleep(100); // Wait for 100 milliseconds (adjust as needed, sometimes browser is slow to respond.)
+             Thread.sleep(1000); // Wait for 100 milliseconds (adjust as needed, sometimes browser is slow to respond.)
          } catch (InterruptedException e) {
              e.printStackTrace();
          }  

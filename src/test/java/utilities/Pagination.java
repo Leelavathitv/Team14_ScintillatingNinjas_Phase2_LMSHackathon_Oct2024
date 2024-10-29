@@ -18,8 +18,7 @@ public class Pagination {
 	WebDriver driver;
 	WebDriverWait wait;
 	
-	
-	@FindBy(xpath="//p-paginator/div/span[1]") WebElement paginationString;
+	@FindBy(xpath="//span[@class = 'p-paginator-current ng-star-inserted']") WebElement entriesfooterPage;
 	@FindBy(xpath="//div[@class='p-datatable-footer ng-star-inserted']/div") WebElement pageFooter;
 	@FindBy(xpath="//span[@class='p-paginator-pages ng-star-inserted']/button")List<WebElement> paginationNumbers;
 	@FindBy(xpath="//span[@class='p-paginator-pages ng-star-inserted']//button[contains(@class,'highlight')]")WebElement currentPage;
@@ -42,12 +41,34 @@ public class Pagination {
 	WebElement firstpage;
 
 	String totalRecords;
+	int totalPages;
 	
 	public Pagination(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(this.driver,this);
 	}
 
+	public int getTotalEntries() {
+	    String resultObserved = entriesfooterPage.getText().trim();
+	    // Use regex to extract the total number of entries from the footer text
+	    String regex = "of (\\d+) entries";
+	    java.util.regex.Pattern pattern = java.util.regex.Pattern.compile(regex);
+	    java.util.regex.Matcher matcher = pattern.matcher(resultObserved);
+	    
+	    if (matcher.find()) {
+	        return Integer.parseInt(matcher.group(1));
+	    }
+	    
+	    return 0; // Return 0 if the format is unexpected
+	}
+	
+	public int getMaxPages() {
+	    int maxEntries = getTotalEntries();
+	    int entriesPerPage = 5; // You mentioned each page shows 5 entries
+
+	    return (int) Math.ceil((double) maxEntries / entriesPerPage);
+	}
+	
 	//Total Records
 	public int extractTotalProgramFromFooter()
 	{
@@ -97,12 +118,24 @@ public class Pagination {
 	{
 		waitForElementToBeClickable(lastPageIcon);
 		lastPageIcon.click();
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+
+			e.printStackTrace();
+		}
 	}
 	
 	public void firstPageClick()
 	{
 		waitForElementToBeClickable(firstPageIcon);
-		firstPageIcon.click();		
+		firstPageIcon.click();
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+
+			e.printStackTrace();
+		}
 	}
 	
 	public boolean isLastPageIconDisplayed()
@@ -136,6 +169,11 @@ public class Pagination {
 	
 
 	public int getSelectedPageNumber() {
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {			
+			e.printStackTrace();
+		}
 		int currentPageNumber=Integer.parseInt(currentPage.getText().trim());
 		return currentPageNumber;
 	}
@@ -143,9 +181,10 @@ public class Pagination {
 	public boolean isPreviousPageFromLastPageDisplayed()
 	{
 		//Identify last page number
-		int lastRecord = paginationNumbers.size();
+		int lastPage = getMaxPages();
 		//last page number -1 should be my current page number
-	    int expectedpagenumber=lastRecord-1;	    
+	    int expectedpagenumber=lastPage-1;
+	    System.out.println("Expected: "+expectedpagenumber + " current Page: " +getSelectedPageNumber());
 	    if(expectedpagenumber==getSelectedPageNumber())
 	    	return true;
 	    else

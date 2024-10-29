@@ -252,12 +252,7 @@ public class ProgramStep2 {
 	@Given("Admin is on last page of Program module table")
 	public void admin_is_on_last_page_of_program_module_table() {
 		Pg.lastPageClick();
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 	}
 
 	@When("Admin clicks Previous page link")
