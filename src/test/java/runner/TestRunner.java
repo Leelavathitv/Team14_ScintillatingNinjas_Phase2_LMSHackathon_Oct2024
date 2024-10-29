@@ -27,10 +27,6 @@ import io.cucumber.testng.CucumberOptions;
 
 public class TestRunner extends AbstractTestNGCucumberTests {
 
-//	@Parameters({"browser"})
-//	public void defineBrowser(@Optional ("chrome") String browser) {
-//		//ConfigFileReader.setBrowserType(browser);
-//	}
 	@Override
 	@DataProvider(parallel = true) // true means execute parallely false mean not execute parallely
 
