@@ -23,7 +23,7 @@ public class ResourceBundleReader {
 	
 	public String getExcel() {
 		String excelData = resouceBundle.getString("exceldata");
-		return excelData;
+		return excelData;		
 	}
 	
 	public String getPageTitle(String titleName) {

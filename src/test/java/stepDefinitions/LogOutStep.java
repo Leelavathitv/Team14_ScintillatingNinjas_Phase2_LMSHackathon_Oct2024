@@ -3,6 +3,7 @@ package stepDefinitions;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -39,9 +40,10 @@ public class LogOutStep {
 
 	@Then("Admin should be redirected to login page")
 	public void admin_should_be_redirected_to_login_page() {
-		
-
+		Assert.assertTrue(logoutpage.isLoginPageAvailable(),"Login Page Submit button should be visible.");
 	}
+	
+	
 
 
 }

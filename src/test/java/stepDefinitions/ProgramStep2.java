@@ -3,6 +3,8 @@ package stepDefinitions;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.expectThrows;
 
+import java.util.Map;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -14,8 +16,11 @@ import io.cucumber.java.en.When;
 import pageObjects.DashboardPage;
 import pageObjects.Program2Page;
 import testContext.TestContext;
+import utilities.ExcelFileData;
+import utilities.ExcelFileReader;
 import utilities.Pagination;
 import utilities.ResourceBundleReader;
+
 
 public class ProgramStep2 {
 	
@@ -81,9 +86,9 @@ public class ProgramStep2 {
 	}
 
 	@Then("There should be zero results for {string}")
-	public void there_should_be_zero_results(String programName) {
- 	    boolean zeroData = ProgramModule.isSearchProgramNameSuccessful(programName);
-	    Assert.assertTrue(zeroData, "Expected no results, but found a program: " + programName);		
+	public void there_should_be_zero_results(String searchString) {
+		String resultObserved = ProgramModule.getTotalSearchResultFromFooter(searchString);
+		Assert.assertEquals(resultObserved, "Showing 0 to 0 of 0 entries", "Zero results found.");
 	}
 	
 
@@ -138,13 +143,22 @@ public class ProgramStep2 {
 	@Then("Admin can see Programs are still selected and not deleted")
 	public void admin_can_see_programs_are_still_selected_and_not_deleted() {
 	}
+	
 
-//---------searchbar----------
-	@When("Admin enter the program to search By program name {string}")
-	public void admin_enter_the_program_to_search_by_program_name(String programName) {
-		ProgramModule.searchProgram(programName);
+    //---------searchbar----------
+	@When("Admin enter the program to search By program name from sheet {string} and {string}")
+	public void admin_enter_the_program_to_search_by_program_name(String option, String sheetName) {
+		
+		try {
+			ExcelFileData.programExcelData(option, sheetName);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ProgramModule.searchProgram(ExcelFileData.programName);
 	}
 
+	
 	@Then("Admin should able to see Program name, description, and status for searched program name {string}")
 	public void admin_should_able_to_see_program_name_description_and_status_for_searched_program_name(String programName) {
 		Assert.assertTrue(ProgramModule.isSearchProgramNameSuccessful(programName),"search should find the program with Program Name.");
@@ -165,14 +179,9 @@ public class ProgramStep2 {
 		ProgramModule.searchProgram(programName);
 	}
 	
-	@Then("There should be zero results")
-	public void There_should_be_zero_results()
-	{
-		
-	}
-
-	@When("Admin enter the program to search By partial name of program")
-	public void admin_enter_the_program_to_search_by_partial_name_of_program() {
+	@When("Admin enter the program to search By partial name of program {string}")
+	public void admin_enter_the_program_to_search_by_partial_name_of_program(String searchString) {
+		ProgramModule.searchProgram(searchString);
 	}
 
 

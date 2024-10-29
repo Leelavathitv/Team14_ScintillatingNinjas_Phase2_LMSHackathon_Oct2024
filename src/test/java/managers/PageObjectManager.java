@@ -35,7 +35,6 @@ public class PageObjectManager {
 	public Program2Page getProgram2Page()
 	{
 		if(program2Page == null) {
-			System.out.println("Inside getProgram2Page object creation");
 			program2Page = new Program2Page(driver);
 		}
 		return program2Page;

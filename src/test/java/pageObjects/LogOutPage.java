@@ -30,6 +30,13 @@ public class LogOutPage {
 	    WebElement logoutModule = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='logout']")));
 	    logoutModule.click();	    
 	}
-   
+	
+	public boolean isLoginPageAvailable() {
+		WebElement submitBtn = driver.findElement(By.xpath("//button[@*='submit']"));
+		if (submitBtn != null)
+			return true;
+		else
+			return false;		
+	}   
 
 }
