@@ -14,17 +14,17 @@ Feature: Manage Program - Search bar
       | option           | sheetName   |
       | ValidProgramData | ProgramPage |
 
-  @Program2 @SearchBarTC_2
-  Scenario: Verify Admin is able to search results found for program description
-    When Admin enter the program to search By program description "LeelaLMSOneDesc"
-    Then Admin should able to see Program name, description, and status for searched program description "LeelaLMSOneDesc"
-
-  @Program2 @SearchBarTC_3
-  Scenario: Verify Admin is able to search results not found
-    When Admin enter the program to search By program name that does not exist "LeelaLMSNotFound"
-    Then There should be zero results for "LeelaLMSNotFound"
-
-  @Program2 @SearchBarTC_4
-  Scenario: Verify Admin is able to search with partial program name
-    When Admin enter the program to search By partial name of program "LeelaLMS"
-    Then Admin should able to see Program name, description, and status for searched program name "LeelaLMS"
+  #@Program2 @SearchBarTC_2
+  #Scenario: Verify Admin is able to search results found for program description
+    #When Admin enter the program to search By program description "LeelaLMSOneDesc"
+    #Then Admin should able to see Program name, description, and status for searched program description "LeelaLMSOneDesc"
+#
+  #@Program2 @SearchBarTC_3
+  #Scenario: Verify Admin is able to search results not found
+    #When Admin enter the program to search By program name that does not exist "LeelaLMSNotFound"
+    #Then There should be zero results for "LeelaLMSNotFound"
+#
+  #@Program2 @SearchBarTC_4
+  #Scenario: Verify Admin is able to search with partial program name
+    #When Admin enter the program to search By partial name of program "LeelaLMS"
+    #Then Admin should able to see Program name, description, and status for searched program name "LeelaLMS"

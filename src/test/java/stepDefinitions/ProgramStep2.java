@@ -1,6 +1,7 @@
 package stepDefinitions;
 
 import static org.testng.Assert.assertEquals;
+
 import static org.testng.Assert.expectThrows;
 
 import java.util.Map;
@@ -16,7 +17,6 @@ import io.cucumber.java.en.When;
 import pageObjects.DashboardPage;
 import pageObjects.Program2Page;
 import testContext.TestContext;
-import utilities.ExcelFileData;
 import utilities.ExcelFileReader;
 import utilities.Pagination;
 import utilities.ResourceBundleReader;
@@ -46,9 +46,10 @@ public class ProgramStep2 {
 		logger.info("admin is in program module page");
 	}
 
-	@When("Admin is logged in successfully and is in program module page")
-	public void admin_is_on_program_module_after_reaching_dashboard() {
-		dashboard.login();
+	
+	@When("Admin is logged in successfully and is in program module page" )
+	public void admin_is_on_program_module_after_reaching_dashboard() {	
+		dashboard.validLogin();
 		ProgramModule.openMenu();
 		ProgramModule.closeMenu();
 	}
@@ -147,15 +148,10 @@ public class ProgramStep2 {
 
     //---------searchbar----------
 	@When("Admin enter the program to search By program name from sheet {string} and {string}")
-	public void admin_enter_the_program_to_search_by_program_name(String option, String sheetName) {
+	public void admin_enter_the_program_to_search_by_program_name(String option, String sheetName)  throws Exception {
 		
-		try {
-			ExcelFileData.programExcelData(option, sheetName);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		ProgramModule.searchProgram(ExcelFileData.programName);
+		Map<String, String> excelSheetRow = ExcelFileReader.getData1(option, sheetName);
+		ProgramModule.searchProgram(excelSheetRow.get("ProgramName"));
 	}
 
 	
@@ -260,9 +256,9 @@ public class ProgramStep2 {
 		Pg.clickPreviousPageIcon();
 	}
 	 
-
-	@Then("Admin should see the previous page record on the table with pagination has previous page link")
-	public void admin_should_see_the_previous_page_record_on_the_table_with_pagination_has_previous_page_link() {
+	
+	@Then("Admin should see previous page record of the table with pagination has previous page link")
+	public void admin_should_see_previous_page_record_of_the_table_with_pagination_has_previous_page_link() {
 		boolean isDisplayed = Pg.isPreviousPageFromLastPageDisplayed();
 		Assert.assertTrue(isDisplayed,"Previous page from last page should be displayed");
 	}

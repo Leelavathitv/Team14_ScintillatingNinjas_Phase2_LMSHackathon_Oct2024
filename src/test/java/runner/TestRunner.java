@@ -12,15 +12,14 @@ import io.cucumber.testng.CucumberOptions;
 
 
 @CucumberOptions(
-		 features = {"src/test/resources/feature/Program2/003_SearchBar.feature","src/test/resources/feature/Program2/001_DeleteProgram.feature"
-				 ,"src/test/resources/feature/Program2/005_Pagination1.feature","src/test/resources/feature/Program2/007_Pagination3.feature"},
-   glue = {"stepDefinitions","hooks","utilities","src/test/resources/feature/Program2/Logout.feature"},
+		 features = {"src/test/resources/feature"},
+   glue = {"stepDefinitions","hooks","utilities"},
    monochrome = true,
 
 	
 
 
-  tags= "",
+  tags= "@DashboardPage",
    plugin= {"pretty","html:target/cucumber-reports/cucumber.html",
    		//"io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm",
    		// "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",

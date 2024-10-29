@@ -228,6 +228,7 @@ public class Pagination {
         actions.moveToElement(element).click().perform();
     }
 	
+    
 	public boolean checkIsNextPageDisabled() {
 		if(checkNextIcon.isEnabled()) {
 			System.out.println("Next Page icon is enabled");
@@ -237,6 +238,19 @@ public class Pagination {
 			System.out.println("Next Page icon is diabled");
 			return true;
 		}
+	}
+	
+	public boolean clickPage(WebElement element) {
+		try {
+	        
+	        wait.until(ExpectedConditions.elementToBeClickable(element));
+	        element.click();
+	        System.out.println("The element clicked successfully");
+	        
+	        return true;
+	    } catch(Exception e){
+	        return false;
+	    }
 	}
 	
 	public WebElement getNextIcon() {

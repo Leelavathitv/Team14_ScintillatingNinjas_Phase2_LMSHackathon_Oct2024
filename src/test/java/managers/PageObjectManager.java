@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import pageObjects.BatchPage;
 import pageObjects.DashboardPage;
 import pageObjects.LogOutPage;
+import pageObjects.LoginPage;
 import pageObjects.Program2Page;
 import utilities.Pagination;
 
@@ -15,6 +16,7 @@ public class PageObjectManager {
 	BatchPage batchPage;
 	Pagination pgPage;
 	LogOutPage logoutPage;
+	LoginPage login;
 	
 	
 	public  PageObjectManager(WebDriver driver) {
@@ -58,4 +60,10 @@ public class PageObjectManager {
 		}
 		return logoutPage;
 }
+	public LoginPage getLoginPage() {
+		if(login == null) {
+			login = new LoginPage(driver);
+		}
+		return login;
+	}
 }

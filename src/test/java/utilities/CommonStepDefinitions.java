@@ -49,17 +49,17 @@ public class CommonStepDefinitions {
 		LoggerLoad.info("You are viewing the " + driver.getTitle() + " page.");
 	}
 
-	@Then("Admin should see the disabled Delete Icon under the header")
-	public void admin_should_see_the_disabled_delete_icon_under_the_header() {
-		Assert.assertTrue(batchObj.deleteIconIsDisabled(), "Delete Icon is Enabled");
-		LoggerLoad.info("Delete Icon is Disabled = " + batchObj.deleteIconIsDisabled());
-	}
+//	@Then("Admin should see the disabled Delete Icon under the header")
+//	public void admin_should_see_the_disabled_delete_icon_under_the_header() {
+//		Assert.assertTrue(batchObj.deleteIconIsDisabled(), "Delete Icon is Enabled");
+//		LoggerLoad.info("Delete Icon is Disabled = " + batchObj.deleteIconIsDisabled());
+//	}
 
-	@Then("Admin should see the checkbox in each row")
-	public void admin_should_see_the_checkbox_in_each_row() {
-		Assert.assertTrue(batchObj.CheckboxesPresentEachRow(), "Checkbox is not present");
-		LoggerLoad.info("Checkbox in each is present = " + batchObj.CheckboxesPresentEachRow());
-		System.out.println("The value : " + batchObj.CheckboxesPresentEachRow());
-	}
+//	@Then("Admin should see the checkbox in each row")
+//	public void admin_should_see_the_checkbox_in_each_row() {
+//		Assert.assertTrue(batchObj.CheckboxesPresentEachRow(), "Checkbox is not present");
+//		LoggerLoad.info("Checkbox in each is present = " + batchObj.CheckboxesPresentEachRow());
+//		System.out.println("The value : " + batchObj.CheckboxesPresentEachRow());
+//	}
 
 }

@@ -19,7 +19,7 @@ Feature: Manage Program - Pagination
   Scenario: Verify Admin is able to click Previous page link
     Given Admin is on last page of Program module table
     When Admin clicks Previous page link
-    Then Admin should see the previous page record on the table with pagination has previous page link
+    Then Admin should see previous page record of the table with pagination has previous page link
 
   @ProgramPagination @PaginationTC_04
   Scenario: Verify Admin is able to click  First page link

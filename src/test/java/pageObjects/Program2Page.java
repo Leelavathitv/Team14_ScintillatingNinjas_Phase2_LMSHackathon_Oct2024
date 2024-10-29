@@ -33,8 +33,6 @@ public class Program2Page {
 		PageFactory.initElements(this.driver, this);
 		this.resourceBundleReader = new ResourceBundleReader();
 	}
-
-	
    
 	//--------------delete program--------------
 	@FindBy(xpath = "//button[@id='program']")
@@ -89,6 +87,7 @@ public class Program2Page {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(timeout));
 
 	}
+
 
     public boolean checkConfirmDeletion() {
         try {
@@ -345,7 +344,7 @@ public class Program2Page {
 	    }
 	}
 	
-    public boolean isProrgramDeleted() {
+    public boolean isProgramDeleted() {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
             wait.until(ExpectedConditions.visibilityOf(deletedMsgToastSummary));
@@ -359,7 +358,7 @@ public class Program2Page {
     }
 	
     public String  isProgramDeletedSuccessfully() {
-        if (isProrgramDeleted()) {
+        if (isProgramDeleted()) {
             return "Successful Program Deleted";
         } else {
             return "Program Deletion Failed";

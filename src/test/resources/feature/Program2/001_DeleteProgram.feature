@@ -3,7 +3,7 @@ Feature: Manage Program - Delete Program
 
   Background: Admin is on program module after reaching dashboard
     Given Admin is on the Program module
-    When Admin is logged in successfully and is in program module page
+    When Admin is logged in successfully and is in program module page 
 
   @DeleteProgram @DeletePgTC_01
   Scenario: Verify delete feature

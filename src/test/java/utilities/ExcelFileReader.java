@@ -44,6 +44,7 @@ public class ExcelFileReader {
     public ExcelFileReader() {
         resourceBundleReader = new ResourceBundleReader(); // Initialize the ResourceBundleReader
     }
+    
 	
 	public List<Map<String, String>> getData(String excelFilePath, String sheetName)
 			throws InvalidFormatException, IOException {
@@ -178,65 +179,37 @@ public class ExcelFileReader {
 	}
 
 
-	public static Map<String, String> getData1(String KeyOption, String sheetName, FileInputStream fi) throws Exception {
-	    Map<String, String> dataMap = new HashMap<String, String>();
-	    
-	    workbook = new XSSFWorkbook(fi); 
-	    sheet = workbook.getSheet(sheetName); 
+	public static Map<String, String> getData1(String KeyOption, String sheetName) throws Exception {
 
-	    int rowData = getRowData(KeyOption.trim(), 0);
+		Map<String, String> dataMap = new HashMap<String, String>();
+		
+		fi = new FileInputStream(resourceBundleReader.getExcel()); 
+		
+		workbook = new XSSFWorkbook(fi); 
+		sheet = workbook.getSheet(sheetName); 
+		
 
-	    if (rowData == 0) {
-	        throw new Exception("NO DATA FOUND for dataKey: " + KeyOption);
-	    }
+		int rowData = getRowData(KeyOption.trim(), 0);
 
-	    int columnCount = sheet.getRow(rowData).getLastCellNum();
+		if (rowData == 0) {
+			throw new Exception("NO DATA FOUND for dataKey: " + KeyOption);
+		}
 
-	    for (int i = 0; i < columnCount; i++) {
-	        cell = sheet.getRow(rowData).getCell(i);
-	        String cellData = null;
-	        if (cell != null) {
-	            if (cell.getCellType() == CellType.NUMERIC) {
-	                cell.setCellType(CellType.STRING);
-	            }
-	            cellData = cell.getStringCellValue();
-	        }
-	        dataMap.put(sheet.getRow(0).getCell(i).getStringCellValue(), cellData);
-	    }
-	    return dataMap;
+		int columnCount = sheet.getRow(rowData).getLastCellNum();
+
+		for (int i = 0; i < columnCount; i++) {
+			cell = sheet.getRow(rowData).getCell(i);
+			String cellData = null;
+			if (cell != null) {
+				if (cell.getCellType() == CellType.NUMERIC) {
+					cell.setCellType(CellType.STRING);
+				}
+				cellData = cell.getStringCellValue();
+			}
+			dataMap.put(sheet.getRow(0).getCell(i).getStringCellValue(), cellData);
+		}
+		return dataMap;
 	}
-	
-//	public static Map<String, String> getData1(String KeyOption, String sheetName) throws Exception {
-//
-//		Map<String, String> dataMap = new HashMap<String, String>();
-//		
-//		fi = new FileInputStream(resourceBundleReader.getExcel()); 
-//		
-//		workbook = new XSSFWorkbook(fi); 
-//		sheet = workbook.getSheet(sheetName); 
-//		
-//
-//		int rowData = getRowData(KeyOption.trim(), 0);
-//
-//		if (rowData == 0) {
-//			throw new Exception("NO DATA FOUND for dataKey: " + KeyOption);
-//		}
-//
-//		int columnCount = sheet.getRow(rowData).getLastCellNum();
-//
-//		for (int i = 0; i < columnCount; i++) {
-//			cell = sheet.getRow(rowData).getCell(i);
-//			String cellData = null;
-//			if (cell != null) {
-//				if (cell.getCellType() == CellType.NUMERIC) {
-//					cell.setCellType(CellType.STRING);
-//				}
-//				cellData = cell.getStringCellValue();
-//			}
-//			dataMap.put(sheet.getRow(0).getCell(i).getStringCellValue(), cellData);
-//		}
-//		return dataMap;
-//	}
 	
 
 	private static int getRowData(String KeyOption, int dataColumn) {
@@ -248,6 +221,7 @@ public class ExcelFileReader {
 		}
 		return 0;
 	}
+	
 
 	private static String getCellData(int rowNumber, int colNumber) {
 		cell = sheet.getRow(rowNumber).getCell(colNumber);
@@ -258,4 +232,6 @@ public class ExcelFileReader {
 		String cellData = cell.getStringCellValue();
 		return cellData;
 	}
+	    
+    
 }
