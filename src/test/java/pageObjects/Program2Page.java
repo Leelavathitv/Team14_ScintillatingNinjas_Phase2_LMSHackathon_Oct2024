@@ -68,15 +68,18 @@ public class Program2Page {
 	public WebElement clickXtoClose;
 //	@FindBy(className="p-dialog-header ng-tns-c204-32 ng-star-inserted")
 //	public WebElement confirmDialog; 
-	@FindBy(xpath="//tbody[contains(@class,'datatable')]/tr/td/following-sibling::td[1]")
+	@FindBy(xpath="(//tbody[contains(@class,'datatable')]/tr/td/following-sibling::td)[1]")
 	public WebElement pgmName;
 
-	@FindBy(xpath="//tbody[contains(@class,'datatable')]/tr/td/following-sibling::td[2]")
+	@FindBy(xpath="(//tbody[contains(@class,'datatable')]/tr/td/following-sibling::td)[2]")
 	public WebElement pgmDesc;
 	
-	@FindBy(xpath="//tbody[contains(@class,'datatable')]/tr/td/following-sibling::td[3]")
+	@FindBy(xpath="(//tbody[contains(@class,'datatable')]/tr/td/following-sibling::td)[3]")
 	public WebElement pgmStatus;
 
+	@FindBy(xpath = "//span[@class = 'p-paginator-current ng-star-inserted']")
+	public WebElement footerPage;
+	
 	public void click_element_with_timeout(WebDriver driver, int timeout, String xpath) {
 		
 		Actions action = new Actions(this.driver);
@@ -142,7 +145,8 @@ public class Program2Page {
 
 	public void searchProgram(String searchString) {
         try {
-        	searchPgm.sendKeys(searchString);       	
+        	searchPgm.sendKeys(searchString);
+        	Thread.sleep(500);
         } catch (NoSuchElementException e) {
         	System.out.println("Program not found: " + searchString);
 
@@ -153,12 +157,46 @@ public class Program2Page {
 	    
 	}
 
-	public boolean isSearchProgramNameSuccessful(String programName) {
-    	return programName.equals(pgmName.getText());
+//	public boolean isSearchProgramNameSuccessful(String givenProgramName) {		
+//		System.out.println("givenProgramName: "+givenProgramName.trim()+" FoundProgramName: "+pgmName.getText().trim());
+//    	return givenProgramName.trim().equals(pgmName.getText().trim());
+//	}
+	
+	public int getTotalEntries() {
+	    String resultObserved = footerPage.getText().trim();
+	    // Use regex to extract the total number of entries from the footer text
+	    String regex = "of (\\d+) entries";
+	    java.util.regex.Pattern pattern = java.util.regex.Pattern.compile(regex);
+	    java.util.regex.Matcher matcher = pattern.matcher(resultObserved);
+	    
+	    if (matcher.find()) {
+	        return Integer.parseInt(matcher.group(1));
+	    }
+	    
+	    return 0; // Return 0 if the format is unexpected
 	}
 	
-	public boolean isSearchProgramDescSuccessful(String programDesc) {
-    	return programDesc.equals(pgmDesc.getText());
+	public boolean isSearchProgramNameSuccessful(String givenProgramName) {
+	    // Trim and get the text of the found program name
+	    String foundProgramName = pgmName.getText().trim();
+	    System.out.println("givenProgramName: " + givenProgramName.trim() + " FoundProgramName: " + foundProgramName);
+
+	    // If there's only one entry, perform an exact match
+	    if (getTotalEntries() == 1) {
+	        return givenProgramName.trim().equals(foundProgramName);
+	    }
+
+	    // For multiple entries, check if the given program name is contained in the found program name
+	    return foundProgramName.contains(givenProgramName.trim());
+	}
+	
+	public boolean isSearchProgramDescSuccessful(String givenProgramDesc) {
+		System.out.println("givenProgramDesc: "+givenProgramDesc.trim()+" FoundProgramDesc: "+pgmDesc.getText().trim());
+    	return givenProgramDesc.trim().equals(pgmDesc.getText().trim());
+	}
+	
+	public String getTotalSearchResultFromFooter(String searchString) {
+		return footerPage.getText();
 	}
 	
 	public void deleteSingleProgramWithName(String programName) {

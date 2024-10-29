@@ -1,4 +1,3 @@
-
 package utilities;
 
 import java.time.Duration;
@@ -85,7 +84,7 @@ public class Pagination {
 
 
 	public void waitForElementToBeClickable(WebElement element) {
-	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 	    wait.until(ExpectedConditions.elementToBeClickable(element));
 	}
 
@@ -95,6 +94,9 @@ public class Pagination {
 		nextPageIcon.click();
 	}
 		
+
+	
+
 	public void lastPageClick()
 	{
 		waitForElementToBeClickable(lastPageIcon);
@@ -202,6 +204,7 @@ public class Pagination {
 		}
 	}
 	
+
 	public boolean clickPage(WebElement element) {
 		try {
 	        
@@ -214,6 +217,7 @@ public class Pagination {
 	        return false;
 	    }
 		}
+
 	public WebElement getNextIcon() {
 		return nextIcon;
 	}
@@ -231,4 +235,6 @@ public class Pagination {
 	}
 
 
+
 }
+

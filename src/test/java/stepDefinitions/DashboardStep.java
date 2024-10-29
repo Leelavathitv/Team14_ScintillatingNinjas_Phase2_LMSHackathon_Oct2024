@@ -36,7 +36,7 @@ public class DashboardStep {
 	}
 
 	@When("Admin enters valid credentials and clicks Login")
-	public void admin_enters_valid_credentials_and_clicks_Login() {
+	public void admin_enters_valid_credentials_and_clicks() {
 		dashboard.login();
 	}
 
