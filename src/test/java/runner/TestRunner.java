@@ -14,7 +14,14 @@ import io.cucumber.testng.CucumberOptions;
 		features = { "src/test/resources/feature" }, glue = { "stepDefinitions", "hooks",
 				"utilities" }, monochrome = true,
 
-		tags = "@DashboardPage", plugin = { "pretty", "html:target/cucumber-reports/cucumber.html",
+	tags = "@DeleteProgram or @Programsearch2 or @ProgramPagination or @Logout or @BatchPageNavigation"
+			+ " or @BatchPageValidation or @AddNewBatch or @BatchPaginationTC_1001 or @BatchSearchTextBox or ClassPV",
+	
+					
+	
+	
+	
+	plugin = { "pretty", "html:target/cucumber-reports/cucumber.html",
 				"io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm",
 				"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:", })
 

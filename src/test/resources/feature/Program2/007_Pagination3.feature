@@ -6,6 +6,6 @@ Given Admin is on the Dashboard Page after Login
 When Admin is logged in successfully with <=5 records in program list
   
   Scenario: Verify pagination when there are no records
-    When Admin clicks "Program" on the navigation bar
+    When Admin clicks Program on the navigation bar
     Then Admin should see pagination icons disabled
  

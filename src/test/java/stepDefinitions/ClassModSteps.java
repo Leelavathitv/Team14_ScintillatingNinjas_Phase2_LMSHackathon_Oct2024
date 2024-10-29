@@ -27,9 +27,10 @@ public class ClassModSteps {
 	public ClassModSteps(TestContext testcontext) {
 		this.testContext = testcontext;
 		this.dashObj = testcontext.getPageObjectManager().getDashboardPage();
-		this.classObj = testcontext.getPageObjectManager().getClassPage();
+
 		this.resourceBundleReader = testcontext.getResourceBundleReader();
 		this.driver = testcontext.getDriverManager().getDriver();
+		this.classObj = testcontext.getPageObjectManager().getClassmodPage();
 	}
 
 	@Given("Admin is on the Dashboard page after login")
@@ -50,17 +51,12 @@ public class ClassModSteps {
 
 	@Then("Admin should see the showing x to y of z entries and enabled pagination controls under the data table")
 	public void admin_should_see_the_showing_x_to_y_of_z_entries_and_enabled_pagination_controls_under_the_data_table() {
-		Assert.assertTrue(classObj.isPaginationEnabled(), "Pagination is not displayed");
-	}
-
-	@Given("The Admin is on the login page of the LMS Portal")
-	public void the_admin_is_on_the_login_page_of_the_lms_portal() {
-		LoggerLoad.info("The Admin is on the login page of the LMS Portal");
+		 Assert.assertTrue(classObj.isPaginationEnabled(), "Pagination is not displayed");
 	}
 
 	@When("Admin is on the Class page after login successful")
 	public void admin_is_on_the_class_page_after_login_successful() {
-		dashObj.login();
+		 dashObj.validLogin();
 		classObj.clickDashboardClass();
 	}
 
@@ -88,17 +84,19 @@ public class ClassModSteps {
 
 		List<String> expectedElementTexts = Arrays
 				.asList(resourceBundleReader.getFunctionalityMessage("ClHeaderName1").split(","));
-		Assert.assertEquals(actualElementTexts, expectedElementTexts);
+		 Assert.assertEquals(actualElementTexts, expectedElementTexts);
 
-		Assert.assertTrue(classObj.editIconEnable(), "Edit/Delete Icon in Batch Page is not Enabled");
+		 Assert.assertTrue(classObj.editIconEnable(), "Edit/Delete Icon in Batch Page is not Enabled");
 
-		LoggerLoad.info("The User is seeing all Header Names present in the page" + classObj.getElementText());
-		LoggerLoad.info("Edit/Delete Icon in Batch Page is present = " + classObj.editIconEnable());
+		 LoggerLoad.info("The User is seeing all Header Names present in the page" +
+		 classObj.getElementText());
+		 LoggerLoad.info("Edit/Delete Icon in Batch Page is present = " +
+		 classObj.editIconEnable());
 	}
 
 	@Then("Admin should see the Sort icon of all the field in the datatable")
 	public void admin_should_see_the_sort_icon_of_all_the_field_in_the_datatable() {
-		Assert.assertTrue(classObj.verifyHeaderSortPresence());
+		 Assert.assertTrue(classObj.verifyHeaderSortPresence());
 		LoggerLoad.info("All header sort elements are present and displayed. " + classObj.verifyHeaderSortPresence());
 	}
 
@@ -110,8 +108,6 @@ public class ClassModSteps {
 
 	@Then("Admin should see Total no of classes in below of the data table")
 	public void admin_should_see_total_no_of_classes_in_below_of_the_data_table() {
-
-		Assert.assertTrue(classObj.getDisplayedTotalClasses());
-
+		 Assert.assertTrue(classObj.getDisplayedTotalClasses());
 	}
 }

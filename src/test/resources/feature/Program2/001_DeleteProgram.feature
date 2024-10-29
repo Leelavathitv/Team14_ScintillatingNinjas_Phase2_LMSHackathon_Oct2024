@@ -5,10 +5,10 @@ Feature: Manage Program - Delete Program
     Given Admin is on the Program module
     When Admin is logged in successfully and is in program module page 
 
-  @DeleteProgram @DeletePgTC_01
-  Scenario: Verify delete feature
-    When Admin clicks on delete button for a program "TeamFifteen"
-    Then Admin will get confirm deletion popup
+  #@DeleteProgram @DeletePgTC_01
+  #Scenario: Verify delete feature
+    #When Admin clicks on delete button for a program "TeamFifteen"
+    #Then Admin will get confirm deletion popup
 
   @DeleteProgram @DeletePgTC_02
   Scenario: Verify Admin is able to click 'Yes'

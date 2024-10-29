@@ -3,7 +3,7 @@ package managers;
 import org.openqa.selenium.WebDriver;
 
 import pageObjects.BatchPage;
-import pageObjects.ClassPage;
+import pageObjects.ClassModPage;
 import pageObjects.DashboardPage;
 import pageObjects.LogOutPage;
 import pageObjects.LoginPage;
@@ -18,8 +18,7 @@ public class PageObjectManager {
 	Pagination pgPage;
 	LogOutPage logoutPage;
 	LoginPage login;
-	ClassPage classPage;
-	
+	ClassModPage classmodPage;
 	
 	public  PageObjectManager(WebDriver driver) {
 		this.driver = driver;
@@ -68,10 +67,11 @@ public class PageObjectManager {
 		}
 		return login;
 	}
-	public ClassPage getClassPage() {
-		if(classPage == null) {
-			classPage = new ClassPage(driver);
+		
+	public ClassModPage getClassmodPage() {
+		if(classmodPage == null) {
+			classmodPage = new ClassModPage(driver);
 		}
-		return classPage;
+		return classmodPage;
 	}
 }

@@ -14,7 +14,7 @@ Feature: Manage Program - Delete Multiple Program
     #missing what we need to select, we have to do select before delete.
     #When Admin clicks on the delete button on the left top of the program page
     #Then Admin will get confirm deletion popup
-
+#
   #Scenario: Verify Admin is able to click 'Yes'
     #Given Admin is on Confirmation form
     #When Admin clicks on Yes button
@@ -24,7 +24,7 @@ Feature: Manage Program - Delete Multiple Program
     #
     #When Admin Searches for "Deleted Program names"
     #Then There should be zero results
-
+#
   #Scenario: Verify Admin is able to click 'No'
     #Given Admin is on Confirmation form
     #When Admin clicks on No button

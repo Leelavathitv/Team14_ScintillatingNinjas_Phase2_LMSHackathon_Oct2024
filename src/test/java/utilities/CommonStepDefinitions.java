@@ -11,6 +11,7 @@ import org.testng.Assert;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import pageObjects.BatchPage;
+import pageObjects.ClassModPage;
 import pageObjects.DashboardPage;
 import stepDefinitions.LoginStep;
 import testContext.TestContext;
@@ -19,6 +20,7 @@ public class CommonStepDefinitions {
 	TestContext testContext;
 	DashboardPage dashboard;
 	BatchPage batchObj;
+	ClassModPage classmodObj;
 	WebDriver driver;
 	ResourceBundleReader resourceBundleReader;
 	Logger logger = LogManager.getLogger(LoginStep.class);
@@ -29,6 +31,7 @@ public class CommonStepDefinitions {
 		this.resourceBundleReader = testcontext.getResourceBundleReader();
 		this.driver = testcontext.getDriverManager().getDriver();
 		this.batchObj = testcontext.getPageObjectManager().getBatchPage();
+		this.classmodObj = testcontext.getPageObjectManager().getClassmodPage();
 
 	}
 

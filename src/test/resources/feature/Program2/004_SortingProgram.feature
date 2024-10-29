@@ -1,4 +1,4 @@
-@Program2
+@Programsort2
 Feature: Manage Program - Sorting Program
 
   Background: Admin is on program module after reaching dashboard

@@ -4,7 +4,7 @@ Feature: Class Page Validation
 
 Background: Admin is on the Dashboard page after login
 		 	Given Admin launch the browser
-  		When Admin enters valid credentials and clicks login
+  		When Admin enters valid credentials and clicks Login
   		Then Admin clicks the Class Navigation bar in the Header
   		
  
