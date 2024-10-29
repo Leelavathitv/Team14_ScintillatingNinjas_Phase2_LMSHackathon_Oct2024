@@ -2,15 +2,15 @@ Feature: Add New Program Functionality
 
  	Background: 
  		Given Admin is on program module after reaching dashboard
- 
+
  	Scenario: Verify add New Program 	
  	 When Admin clicks on "New Program" under the "Program" menu bar
  	 Then Admin should see pop up window for program details
- 	 
+	 
  	Scenario: Verify title of the pop up window 		
  		When Admin clicks on "New Program" under the "Program" menu bar
  		Then Admin should see window title as "Program Details"
- 		
+		
  	Scenario: Verify mandatory fields with red "*" mark 
  		When Admin clicks on "New Program" under the "Program" menu bar
  		Then Admin should see red "*" mark beside mandatory field "Name"
@@ -23,7 +23,7 @@ Feature: Add New Program Functionality
  	Scenario: Verify cancel button
  		Given Admin is on Program details form
  		When Admin clicks Cancel button
- 		Then Admin can see Program Details form disappears 
+ 		Then Admin can see the Program details form disappears 
  		
  	Scenario: Verify enter program name
  		Given Admin is on Program details form
@@ -48,7 +48,7 @@ Feature: Add New Program Functionality
  	Scenario: Verify cancel program details
  		Given Admin is on Program details form
  		When Admin Click on cancel button
- 		Then Admin can see program details form disappear
+ 		Then Admin can see the Program details form disappears
  		
  	Scenario: Verify added Program is created
  		When Admin searches with newly created "Program Name"
@@ -57,12 +57,13 @@ Feature: Add New Program Functionality
  	Scenario: Verify close window with "X" 
  		Given Admin is on Program details form
  		When Admin Click on "X" button
- 		Then Admin can see program details form disappear
+ 		Then Admin can see the Program details form disappears
  		
  	@EditProgram
  	Scenario: Verify Edit option 		
  		When Admin clicks on Edit option for particular program
- 		Then Admin lands on Program details form
+ 		Then Admin can see the Program details form disappears
+ 		
  		
  	Scenario: Verify title of the pop up window
  		When Admin clicks on Edit option for particular program
@@ -87,18 +88,19 @@ Feature: Add New Program Functionality
  	Scenario: Verify Admin is able to click Save
  		When Admin click on save button
  		Then Admin can see the updated program details
- 		
+		
  	Scenario: Verify Admin is able to click Cancel
- 		When Admin click on cancel button
+ 		When Admin Click on cancel button
  		Then Admin can see the Program details form disappears
  		
  	Scenario: Verify edited Program details
  		When Admin searches with newly updated "Program Name"
  		Then Admin verifies that the details are correctly updated.
- 		
+	
  	Scenario: Verify close the window with "X" 
  		When Admin Click on "X" button
- 		Then Admin can see program details form disappear
+ 		Then Admin can see the Program details form disappears
+ 		
  		
  		
  		

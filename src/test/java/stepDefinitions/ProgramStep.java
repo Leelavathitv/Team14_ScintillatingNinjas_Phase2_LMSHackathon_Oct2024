@@ -1,8 +1,33 @@
 package stepDefinitions;
 
+import org.apache.logging.log4j.LogManager;
+
+import org.openqa.selenium.WebDriver;
+
+import org.apache.logging.log4j.Logger;
+
 import io.cucumber.java.en.*;
+import pageObjects.DashboardPage;
+import pageObjects.Program1Page;
+import testContext.TestContext;
+import utilities.LoggerLoad;
+import utilities.ResourceBundleReader;
 
 public class ProgramStep {
+	TestContext testContext;
+	DashboardPage dashObj;
+	Program1Page programObj;
+	WebDriver driver;
+	ResourceBundleReader resourceBundleReader;
+	Logger logger = LogManager.getLogger(LoginStep.class);
+	
+	public ProgramStep(TestContext testcontext) {
+		this.testContext = testcontext;
+		this.dashObj = testcontext.getPageObjectManager().getDashboardPage();
+		this.programObj = testcontext.getPageObjectManager().getProgramPage();
+		this.resourceBundleReader = testcontext.getResourceBundleReader();
+		this.driver = testcontext.getDriverManager().getDriver();
+	}
 	@Given("Admin is logged in to LMS Portal")
 	public void admin_is_logged_in_to_lms_portal() {
 	   
@@ -13,57 +38,71 @@ public class ProgramStep {
 	   
 	}
 
-
 	@When("Admin clicks {string} on the navigations bar")
 	public void admin_clicks_on_the_navigations_bar(String string) {
-
 	   
 	}
 
-	@Then("Admin should be navigated to Program module")
-	public void admin_should_be_navigated_to_program_module() {
-	   
+	@Then("Admin should be navigated to {string} module")
+	public void admin_should_be_navigated_to_program_module(String string) {
+		programObj.page_admin_should_be_navigated_to_program_module(string);
 	}
 
 	@Then("Admin should not have any broken links for Program module")
 	public void admin_should_not_have_any_broken_links_for_program_module() {
-	   
+		programObj.page_admin_should_not_have_any_broken_links_for_program_module();
 	}
 
 	@Then("Admin should see the heading {string}")
 	public void admin_should_see_the_heading(String string) {
-	    
+		programObj.page_admin_should_see_the_heading(string);
 	}
+	@Then("Admin should see the heading {string} inside {string}")
+	public void admin_should_see_the_heading_inside(String string1, String string2) {
+		programObj.page_admin_should_see_the_heading_inside_program(string1, string2);
+	}
+
 
 	@Then("Admin should see the module names as in order {string}")
-	public void admin_should_see_the_module_names_as_in_order(String string) {
-	   
+	public void admin_should_see_the_module_names_as_in_order(String expectedModules) {
+		programObj.page_admin_should_see_the_module_names_as_in_order(expectedModules);
 	}
 
-	@Then("Admin should see Logout in menu bar")
-	public void admin_should_see_logout_in_menu_bar() {
-	    
+	@Then("Admin should see {string} in menu bar")
+	public void admin_should_see_in_menu_bar(String string) throws InterruptedException {
+		programObj.page_admin_should_see_in_menu_bar(string);
+		//prog_loginPage.addBatch();
 	}
 
 	@Given("Admin is on program page")
 	public void admin_is_on_program_page() {
-	    	}
+		LoggerLoad.info("The Admin is on the login page of the LMS Portal");
+	}
+	@When("Admin clicks {string} on the navigation bar")
+	public void admin_clicks_on_the_navigation_bar(String string) {
+		programObj.page_admin_clicks_on_the_navigations_bar(string);
+	}
+	
+	
+	@When("Admin clicks {string} on the navigation bar program")
+	public void admin_clicks_on_the_navigation_bar_program(String string) {
+	   programObj.clickaddNewProgram();
+	}
 
 
 	@Then("Admin should see sub menu in menu bars as {string}")
-	public void admin_should_see_sub_menu_in_menu_bars_as(String string) {
-
-	   
+	public void admin_should_see_sub_menu_in_menu_bars_as(String add_New_Prog) {
+		programObj.page_admin_should_see_sub_menu_in_menu_bars_as(add_New_Prog);
 	}
+	
 
-	@Then("Admin should able to see Program name, description, and status for each program")
-	public void admin_should_able_to_see_program_name_description_and_status_for_each_program() {
-	  
+	@Then("Admin should able to see Program name, description, and status for each {string}")
+	public void admin_should_able_to_see_program_name_description_and_status_for_each(String string) {
+		programObj.page_dmin_should_able_to_see_program_name_description_and_status_for_each(string);
 	}
-
 	@Then("Admin should see a Delete button in left top is disabled")
 	public void admin_should_see_a_delete_button_in_left_top_is_disabled() {
-	   
+		programObj.page_admin_should_see_a_delete_button_in_left_top_is_disabled();
 	}
 
 	@Then("Admin should see Search bar with text as {string}")
@@ -101,10 +140,8 @@ public class ProgramStep {
 	    
 	}
 
-
 	@Then("Admin should see the footer as {string}.")
 	public void admin_should_see_the_footer_as(String string) {
-
 	   
 	}
 	
@@ -117,42 +154,45 @@ public class ProgramStep {
 	public void admin_is_on_program_module() {
 	    
 	}
-
+	@When("Admin clicks on {string} under the {string} menu bar")
+	public void admin_clicks_on_under_the_menu_bar(String string, String string2) {
+	   programObj.clickaddNewProgram();
+	}
 
 	@When("Admin clicks on the {string} under the {string} menu bars")
 	public void admin_clicks_on_the_under_the_menu_bars(String string, String string2) {
-
 	   
 	}
 
 	@Then("Admin should see pop up window for program details")
 	public void admin_should_see_pop_up_window_for_program_details() {
-	    
+		Assert.assertEquals(programObj.getTextNewProgram(), resourceBundleReader.getFunctionalityMessageProgram("addNewProgram"));
 	}
 
 	@Then("Admin should see window title as {string}")
 	public void admin_should_see_window_title_as(String string) {
+		Assert.assertEquals("Program Details", programObj.verifyTitleProgramDetails());
 	    
 	}
 
 	@Then("Admin should see red {string} mark beside mandatory field {string}")
 	public void admin_should_see_red_mark_beside_mandatory_field(String string, String string2) {
-	    
+	    programObj.verifyAsteriskPresence();
 	}
 
 	@Given("Admin is on Program details form")
 	public void admin_is_on_program_details_form() {
-	    
+		LoggerLoad.info("The Admin is on the Program Details form");
 	}
 
 	@When("Admin clicks save button without entering mandatory")
 	public void admin_clicks_save_button_without_entering_mandatory() {
-	    
+	    programObj.clickSaveButton();
 	}
 
 	@Then("Admin gets message {string}")
 	public void admin_gets_message(String string) {
-	    
+	    programObj.errorMessage();
 	}
 
 	@When("Admin clicks Cancel button")
@@ -160,13 +200,7 @@ public class ProgramStep {
 	    
 	}
 
-	@Then("Admin can see Program Details form disappears")
-	public void admin_can_see_program_details_form_disappears() {
-	    
-	}
-
 	
-
 	@When("Admin enters the Name in the text box")
 	public void admin_enters_the_name_in_the_text_box() {
 	    
@@ -204,13 +238,9 @@ public class ProgramStep {
 
 	@When("Admin Click on cancel button")
 	public void admin_click_on_cancel_button() {
-	    
+	    programObj.clickCancelButton();
 	}
 
-	@Then("Admin can see program details form disappear")
-	public void admin_can_see_program_details_form_disappear() {
-	  
-	}
 
 	@When("Admin searches with newly created {string}")
 	public void admin_searches_with_newly_created(String string) {
@@ -224,75 +254,63 @@ public class ProgramStep {
 
 	@When("Admin Click on {string} button")
 	public void admin_click_on_button(String string) {
-	    
+	    programObj.clickCloseButton();
 	}
-
 
 	@When("Admin can change the status of the program and click on save button")
 	public void admin_can_change_the_status_of_the_program_and_click_on_save_button() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	  
 	}
 	@Then("Status updated can be viewed by the Admin")
 	public void status_updated_can_be_viewed_by_the_admin() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    
 	}
 	
 	@When("Admin searches with newly updated {string}")
 	public void admin_searches_with_newly_updated(String string) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	   
 	}
 	@Then("Admin verifies that the details are correctly updated.")
 	public void admin_verifies_that_the_details_are_correctly_updated() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	   
 	}
 	
 	
 	@When("Admin edits the program name and click on save button")
 	public void admin_edits_the_program_name_and_click_on_save_button() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    
 	}
 	@Then("Updated program name is seen by the Admin")
 	public void updated_program_name_is_seen_by_the_admin() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    
 	}
 
 	@When("Admin clicks on Edit option for particular program")
 	public void admin_clicks_on_edit_option_for_particular_program() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    
 	}
 	@When("Admin edits the description text and click on save button")
 	public void admin_edits_the_description_text_and_click_on_save_button() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	   
 	}
 	@Then("Admin can see the description is updated")
 	public void admin_can_see_the_description_is_updated() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    
 	}
 	
 	@When("Admin click on save button")
 	public void admin_click_on_save_button() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	   
 	}
 	@Then("Admin can see the updated program details")
 	public void admin_can_see_the_updated_program_details() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	   
 	}
+	
 	
 	@Then("Admin can see the Program details form disappears")
 	public void admin_can_see_the_program_details_form_disappears() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		Assert.assertTrue(programObj.closeProgramDetailsForm(),"The Program Details form did not disappear");
 	}
 
 }
