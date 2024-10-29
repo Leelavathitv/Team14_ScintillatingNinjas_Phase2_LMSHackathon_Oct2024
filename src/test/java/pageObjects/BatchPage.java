@@ -187,27 +187,29 @@ public class BatchPage {
 //	public void nextPageClicks() {
 //		nextPageIcon.click();
 //	}
-	public void waitForElementToBeClickable(WebElement element) {
-	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-	    wait.until(ExpectedConditions.elementToBeClickable(element));
-	}
+//	public void waitForElementToBeClickable(WebElement element) {
+//	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+//	    wait.until(ExpectedConditions.elementToBeClickable(element));
+//	}
 	
 
 
-	public void nextPageClicks() throws InterruptedException
-	{                                                         //span[contains(@class,'angle-right')]/parent::button[contains(@class,'next')]")
-		//WebElement nextButton = driver.findElement(By.xpath("//span[contains(@class,'angle-right')]/parent::button[contains(@class,'next')]"));
-		Thread.sleep(1000);
-		((JavascriptExecutor) driver).executeScript("arguments[0].click();", nextPageIcon);
-		
-		//waitForElementToBeClickable(nextPageIcon);
-		
-		WebElement nextButton = new WebDriverWait(driver, Duration.ofSeconds(10))
-		        .until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(@class,'angle-right')]/parent::button[contains(@class,'next')]")));
-		nextButton.click();
-
-		//nextPageIcon.click();
-	}
+//	public void nextPageClicks() throws InterruptedException
+//	{                                                         //span[contains(@class,'angle-right')]/parent::button[contains(@class,'next')]")
+//		//WebElement nextButton = driver.findElement(By.xpath("//span[contains(@class,'angle-right')]/parent::button[contains(@class,'next')]"));
+//		Thread.sleep(1000);
+//		
+//		
+//		//waitForElementToBeClickable(nextPageIcon);
+//		
+////		WebElement nextButton = new WebDriverWait(driver, Duration.ofSeconds(10))
+////		        .until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(@class,'angle-right')]/parent::button[contains(@class,'next')]")));
+////		nextButton.click();
+//
+//		//nextPageIcon.click();
+//		
+//		((JavascriptExecutor) driver).executeScript("arguments[0].click();", nextPageIcon);
+//	}
 
 //	public void loginUsingCookies() {
 //		for (Cookie cookie : allCookies) {

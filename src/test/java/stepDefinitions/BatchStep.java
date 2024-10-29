@@ -339,7 +339,7 @@ public class BatchStep {
 
 	@When("Admin clicks next page link on the data table")
 	public void admin_clicks_next_page_link_on_the_data_table() throws InterruptedException {
-		batchObj.nextPageClicks();
+		paginationObj.clickPage(paginationObj.getNextIcon());
 	}
 
 	@Then("Admin should see the Next enabled link")
@@ -352,12 +352,7 @@ public class BatchStep {
 	public void admin_clicks_last_page_link_on_the_data_table() {
 		paginationObj.lastPageClick();
 
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 	}
 
 	@Then("Admin should see the last page link with next page link disabled on the table")

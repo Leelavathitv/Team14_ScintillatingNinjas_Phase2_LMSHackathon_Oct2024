@@ -202,6 +202,18 @@ public class Pagination {
 		}
 	}
 	
+	public boolean clickPage(WebElement element) {
+		try {
+	        
+	        wait.until(ExpectedConditions.elementToBeClickable(element));
+	        element.click();
+	        System.out.println("The element clicked successfully");
+	        
+	        return true;
+	    } catch(Exception e){
+	        return false;
+	    }
+		}
 	public WebElement getNextIcon() {
 		return nextIcon;
 	}

@@ -21,7 +21,7 @@ import io.cucumber.testng.CucumberOptions;
 	
 
 
-  tags= "@Program2",
+  tags= "@BatchPaginationTC_1001",
 		 //  tags= "@BatchPageNavigation or @AddNewBatch or @BatchPageValidation",
    plugin= {"pretty","html:target/cucumber-reports/cucumber.html",
    		"io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm",
