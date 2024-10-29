@@ -36,8 +36,6 @@ public class Hooks {
 		driver = DriverManager.getDriver();
 		driver.get(resourceBun.getInstance().getUrl());
 
-
-	
 	}
 
 	@After

@@ -4,11 +4,13 @@ import org.openqa.selenium.WebDriver;
 
 import pageObjects.BatchPage;
 import pageObjects.DashboardPage;
+import pageObjects.LoginPage;
 
 public class PageObjectManager {
 	WebDriver driver;
 	DashboardPage loginPage;
 	BatchPage batchPage;
+	LoginPage login;
 	
 	public  PageObjectManager(WebDriver driver) {
 		this.driver = driver;
@@ -29,5 +31,12 @@ public class PageObjectManager {
 			batchPage = new BatchPage(driver);
 		}
 		return batchPage;
+	}
+	
+	public LoginPage getLoginPage() {
+		if(login == null) {
+			login = new LoginPage(driver);
+		}
+		return login;
 	}
 }

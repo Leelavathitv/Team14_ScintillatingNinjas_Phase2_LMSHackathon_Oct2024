@@ -6,6 +6,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
+import io.cucumber.java.Before;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 
@@ -13,7 +14,7 @@ import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(
 
-		 features = {"src/test/resources/feature"},
+		 features = {"src/test/resources/feature/Login andDashboard/002_Login.feature"},
    glue = {"stepDefinitions","hooks","utilities"},
 
    monochrome = true,
@@ -21,7 +22,7 @@ import io.cucumber.testng.CucumberOptions;
 	
 
 
-  tags= "@BatchPageValidation",
+  tags= "",
    plugin= {"pretty","html:target/cucumber-reports/cucumber.html",
    		"io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm",
    		 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
@@ -38,7 +39,7 @@ public class TestRunner extends AbstractTestNGCucumberTests{
 //	}
 	@Override
    @DataProvider(parallel = false)//true means execute parallely false mean not execute parallely
-	
+	@Before
    public Object[][] scenarios() {
 				
 		return super.scenarios();
