@@ -175,9 +175,12 @@ public class BatchPage {
 	}
 
 	public void clickLogout() {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-		wait.until(ExpectedConditions.elementToBeClickable(logout));
-		logout.click();
+//		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+//		wait.until(ExpectedConditions.elementToBeClickable(logout));
+//		logout.click();
+		 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+		    WebElement logoutModule = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='logout']")));
+		    logoutModule.click();	    
 	}
 
 	public String getActualTextLogout() {

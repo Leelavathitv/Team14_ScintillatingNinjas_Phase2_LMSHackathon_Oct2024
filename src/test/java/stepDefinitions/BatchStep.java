@@ -350,7 +350,14 @@ public class BatchStep {
 
 	@When("Admin clicks last page link on the data table")
 	public void admin_clicks_last_page_link_on_the_data_table() {
-		paginationObj.lastPageClick();
+		paginationObj.clickPage(paginationObj.getLastIcon());
+		// pagination.clickPage(pagination.getLastIcon());
+//		try {
+//			Thread.sleep(1000);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 
 		
 	}
@@ -365,12 +372,13 @@ public class BatchStep {
 
 	@When("Admin clicks backward page link on the data table")
 	public void admin_clicks_backward_page_link_on_the_data_table() {
-
+		paginationObj.clickPage(paginationObj.getLastIcon());
 	}
 
 	@Then("Admin should see the previous page on the table")
 	public void admin_should_see_the_previous_page_on_the_table() {
-
+		//Assert.assertFalse(isDisplayed, "Next page icon should be disabled");
+		//pagination.checkIsNextPageDisabled();
 	}
 
 	@When("Admin clicks first page link on the data table")
