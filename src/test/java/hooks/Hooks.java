@@ -32,7 +32,6 @@ public class Hooks {
 		driver = DriverManager.initializeDriver(browser);
 		driver.get(resouceBundle.getUrl());
 
-		// driver.get("https://lms-frontend-hackathon-oct24-173fe394c071.herokuapp.com/login");
 		System.out.println("*******Driver value in hooks*******" + driver);
 	}
 
