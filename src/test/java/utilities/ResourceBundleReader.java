@@ -3,6 +3,7 @@ package utilities;
 import java.util.ResourceBundle;
 
 public class ResourceBundleReader {
+	private static ResourceBundleReader resourceBundleReader = new ResourceBundleReader();
 	
 	ResourceBundle resouceBundle = ResourceBundle.getBundle("config/Configuration");
 	
@@ -38,6 +39,9 @@ public class ResourceBundleReader {
 	public String getProgramDeleteConfirm(String titleName) {
 		String title = resouceBundle.getString(titleName);
 		return title;
+	}
+	public ResourceBundleReader getInstance() {
+		return resourceBundleReader;
 	}
 
 //	public String getSuccessfulProgramDeleted(String titleName) {

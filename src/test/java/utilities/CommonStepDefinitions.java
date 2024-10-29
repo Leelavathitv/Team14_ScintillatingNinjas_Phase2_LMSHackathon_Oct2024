@@ -28,16 +28,16 @@ public class CommonStepDefinitions {
 		this.batchObj = testcontext.getPageObjectManager().getBatchPage();
 	
 	}
-	
-//	@Given("The Admin is on the login page of the LMS Portal")
-//	public void the_admin_is_on_the_login_page_of_the_lms_portal() {
-//		LoggerLoad.info("The Admin is on the login page of the LMS Portal");
-//	}
+		@Given("The Admin is on the login page of the LMS Portal")
+	public void the_admin_is_on_the_login_page_of_the_lms_portal() {
+		LoggerLoad.info("The Admin is on the login page of the LMS Portal");
+
+	}
 	
 	
 	//---- This is coming from the Each Scenario Given -----------
 	
-	@Given("Admin is on the Dashboard Pages")
+	@Given("Admin is on the Dashboard Page after Login")
 	public void admin_is_on_the_dashboard_pages() {
 		LoggerLoad.info("You are in " + driver.getTitle() + " page.");
 		System.out.println("You are in Dashboard Page");

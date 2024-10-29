@@ -6,5 +6,5 @@ Feature: Manage Program - Pagination2
     When Admin is logged in to LMS Portal with no records in program list
 
   Scenario: Verify pagination when there are no records
-    When Admin clicks "Program" on the navigation bar
+    When Admin clicks Program on the navigation bar
     Then Admin should not see any pagination icons and message "No records found"

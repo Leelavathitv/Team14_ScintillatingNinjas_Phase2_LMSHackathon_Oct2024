@@ -35,7 +35,7 @@ public class DashboardStep {
 		logger.info("Admin launched the Browser");
 	}
 
-	@When("Admin enters valid credentials and clicks login button")
+	@When("Admin enters valid credentials and clicks Login")
 	public void admin_enters_valid_credentials_and_clicks() {
 		dashboard.login();
 	}
