@@ -18,6 +18,7 @@ import io.cucumber.java.en.*;
 
 import utilities.ConfigFileReader;
 import utilities.LoggerLoad;
+import utilities.Pagination;
 import utilities.ResourceBundleReader;
 
 public class BatchStep {
@@ -26,6 +27,7 @@ public class BatchStep {
 	DashboardPage dashObj;
 	BatchPage batchObj;
 	WebDriver driver;
+	Pagination paginationObj;
 	ResourceBundleReader resourceBundleReader;
 	Logger logger = LogManager.getLogger(LoginStep.class);
 	WebElement clickandEnable;
@@ -36,7 +38,10 @@ public class BatchStep {
 		this.batchObj = testcontext.getPageObjectManager().getBatchPage();
 		this.resourceBundleReader = testcontext.getResourceBundleReader();
 		this.driver = testcontext.getDriverManager().getDriver();
+		this.paginationObj=testcontext.getPageObjectManager().getPgPage();
+
 	}
+
 //-------------01-----------
 	@When("Admin Clicks on the Batch menu from the header")
 	public void admin_clicks_on_the_batch_menu_from_the_header() {
@@ -45,7 +50,7 @@ public class BatchStep {
 
 	@Then("Admin should be in the Manage Batch Page")
 	public void admin_should_be_in_the_manage_batch_page() {
-		Assert.assertEquals(batchObj.getActualTitle(), resourceBundleReader.getPageTitle("pagetitle"));
+		Assert.assertEquals(batchObj.getActualTitle(), resourceBundleReader.getPageTitle("ManageBatchPageTitle"));
 		LoggerLoad.info("You are viewing the " + driver.getTitle() + " page.");
 	}
 
@@ -124,6 +129,7 @@ public class BatchStep {
 	@Then("Admin should see sub menu in menu bar as Add New Batch")
 	public void admin_should_see_sub_menu_in_menu_bar_as_add_new_batch() {
 		Assert.assertEquals(batchObj.getTextNewBatch(), resourceBundleReader.getFunctionalityMessage("addNewBatch"));
+		LoggerLoad.info("All header sort elements are present and displayed. " + batchObj.verifyHeaderSortPresence());
 	}
 
 	@When("Admin clicks on Add New batch under the batch menu bar")
@@ -134,6 +140,7 @@ public class BatchStep {
 	@Then("Admin should see the Batch Details pop up window")
 	public void admin_should_see_the_batch_details_pop_up_window() {
 		Assert.assertEquals(batchObj.getTextNewBatch(), resourceBundleReader.getFunctionalityMessage("addNewBatch"));
+		LoggerLoad.info("Admin should see the Batch Details pop up window " + batchObj.getTextNewBatch());
 	}
 
 //----------------------04------------------------------
@@ -241,6 +248,11 @@ public class BatchStep {
 
 	}
 
+	@Then("Admin should see the Batch details pop up window")
+	public void admin_should_see_the_batch_detail_pop_up_window() {
+
+	}
+
 	@Then("Admin should see Program name value field is disabled for editing")
 	public void admin_should_see_program_name_value_field_is_disabled_for_editing() {
 
@@ -326,22 +338,33 @@ public class BatchStep {
 //-------------------------080---------------------------
 
 	@When("Admin clicks next page link on the data table")
-	public void admin_clicks_next_page_link_on_the_data_table() {
-
+	public void admin_clicks_next_page_link_on_the_data_table() throws InterruptedException {
+		batchObj.nextPageClicks();
 	}
 
 	@Then("Admin should see the Next enabled link")
 	public void admin_should_see_the_next_enabled_link() {
 
+		Assert.assertTrue( paginationObj.isNextPageIconDisplayed(), "Next page icon is not displayed");
 	}
 
 	@When("Admin clicks last page link on the data table")
 	public void admin_clicks_last_page_link_on_the_data_table() {
+		paginationObj.lastPageClick();
 
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Then("Admin should see the last page link with next page link disabled on the table")
 	public void admin_should_see_the_last_page_link_with_next_page_link_disabled_on_the_table() {
+		boolean isDisplayed = paginationObj.isNextLinksDisabled();
+
+		Assert.assertFalse(isDisplayed, "Next page icon should be disabled");
 
 	}
 
@@ -366,26 +389,27 @@ public class BatchStep {
 	}
 
 //--------------------------------09------------------------
-	@When("Admin enters the batch name in the serach text box")
-	public void admin_enters_the_batch_name_in_the_serach_text_box() {
-
+	@When("Admin enters the batch name in the search text box")
+	public void admin_enters_the_batch_name_in_the_search_text_box() {
+		batchObj.searchBoxfilter();
 	}
 
 	@Then("Admin should see the filtered batches in the data table")
 	public void admin_should_see_the_filtered_batches_in_the_data_table() {
-
+		Assert.assertTrue(batchObj.searchGetText(), "Filtered Results is not showing");
+		LoggerLoad.info("Admin should see the filtered batches in the data table ");
 	}
 
 	// ----------------------10--------------------
 
 	@When("Admin clicks on the logout button")
 	public void admin_clicks_on_the_logout_button() {
-
+		batchObj.clickLogout();
 	}
 
 	@Then("Admin should see the Login screen Page")
 	public void admin_should_see_the_login_screen_page() {
-
+		Assert.assertEquals(batchObj.getActualTextLogout(), resourceBundleReader.getFunctionalityMessage("logout"));
+		LoggerLoad.info("Admin should see the filtered batches in the data table ");
 	}
-
 }

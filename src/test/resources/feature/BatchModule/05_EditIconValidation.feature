@@ -1,11 +1,14 @@
 @BatchEditIcon
 Feature: Edit icon Validation
 
-  Background: Admin is on the batch page
+ Background: Admin is on the Batch page
+    Given The Admin is on the login page of the LMS Portal
+    When Admin is on the Batch page after login successful
 
+@BatchEditIcon     @BatchEditTC_1001
   Scenario: Validate Edit icon feature in any row
     When Admin clicks the edit icon
-    Then Admin should see the Batch details pop up window
+    Then Admin should see the Batch detail pop up window
 
   Scenario: Validate program name value is disabled to edit
     When Admin clicks the edit icon

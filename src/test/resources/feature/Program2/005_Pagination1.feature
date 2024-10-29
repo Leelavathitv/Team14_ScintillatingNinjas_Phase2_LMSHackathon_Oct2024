@@ -20,5 +20,5 @@ Feature: Manage Program - Pagination
 
   Scenario: Verify Admin is able to click  First page link
     Given Admin is on Previous Program page
-    When Admin clicks First page link
-    Then Admin should see the very first page record on the table with Previous page link are disabled
+    When Admin clicks First Program page
+    Then Admin should see the very first page record of the table with Previous page link are disabled

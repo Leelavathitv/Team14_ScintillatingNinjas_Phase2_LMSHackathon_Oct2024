@@ -1,7 +1,8 @@
-
 package pageObjects;
 
+
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.concurrent.TimeoutException;
@@ -18,11 +19,15 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import utilities.Pagination;
 import utilities.ResourceBundleReader;
+
 public class Program2Page {
 	WebDriver driver;
-	ResourceBundleReader resourceBundleReader;
-
+	ResourceBundleReader resourceBundleReader;	
+	List<String> programNames;
+	Pagination pg;
+	
 	public Program2Page(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(this.driver, this);
@@ -63,6 +68,14 @@ public class Program2Page {
 	public WebElement clickXtoClose;
 //	@FindBy(className="p-dialog-header ng-tns-c204-32 ng-star-inserted")
 //	public WebElement confirmDialog; 
+	@FindBy(xpath="//tbody[contains(@class,'datatable')]/tr/td/following-sibling::td[1]")
+	public WebElement pgmName;
+
+	@FindBy(xpath="//tbody[contains(@class,'datatable')]/tr/td/following-sibling::td[2]")
+	public WebElement pgmDesc;
+	
+	@FindBy(xpath="//tbody[contains(@class,'datatable')]/tr/td/following-sibling::td[3]")
+	public WebElement pgmStatus;
 
 	public void click_element_with_timeout(WebDriver driver, int timeout, String xpath) {
 		
@@ -115,35 +128,38 @@ public class Program2Page {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 	    WebElement deleteButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[text()='"+ programName +"']/following-sibling::td/div/span/button[contains(@id,'deleteProgram')]")));
 	    deleteButton.click();		
-    } 
+    }
+	
+	public String getProgramDescription(WebElement s) {
+		String progDesc = s.findElement(By.xpath("following-sibling::td[1]")).getText();
+		return progDesc;
+	}
 
-	public void searchSingleProgramWithName(String programName) {
-	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+	public String getProgStatus(WebElement s) {
+		String progStatus = s.findElement(By.xpath("following-sibling::td[1]")).getText();
+		return progStatus;
+	}
+
+	public void searchProgram(String searchString) {
         try {
-        	searchPgm.sendKeys(programName);       	
+        	searchPgm.sendKeys(searchString);       	
         } catch (NoSuchElementException e) {
-        	System.out.println("Program not found: " + programName);
+        	System.out.println("Program not found: " + searchString);
 
         } catch (Exception e) {
-            System.out.println("An error occurred while trying to delete " + programName + ": " + e.getMessage());
+            System.out.println("An error occurred while trying to delete " + searchString + ": " + e.getMessage());
 
         }
 	    
 	}
 
-	public boolean isSearchSuccessful(String programName) {
-	    try {	        
-	        // Wait for the specific element to be present
-	        boolean noSearchData = driver.findElements(By.xpath("//td[text()='" + programName + "']/following-sibling::td/div/span/button[contains(@id,'deleteProgram')]")).size() == 0 ;
-	        System.out.println("results for the program: " + noSearchData);
-	        return noSearchData;
-	    } catch (NoSuchElementException e) {
-	        // This exception will also indicate that the element is not found
-	        System.out.println("Zero results found for the program: " + programName);
-	        return false; // Return false if the button is not found
-	    }
+	public boolean isSearchProgramNameSuccessful(String programName) {
+    	return programName.equals(pgmName.getText());
 	}
-
+	
+	public boolean isSearchProgramDescSuccessful(String programDesc) {
+    	return programDesc.equals(pgmDesc.getText());
+	}
 	
 	public void deleteSingleProgramWithName(String programName) {
 	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -189,12 +205,70 @@ public class Program2Page {
 	    deleteMultiple.click();
 	}
 
+	public void selectMultipleProgramsWithCheckBox() {
+        
+        List<WebElement> CheckBoxElements = driver.findElements(By.xpath("//div[@role='checkbox']"));
+        for (int i=1; i<CheckBoxElements.size(); i++) { //staring from index 1, to avoid master checkbox selection.
+        	WebElement checkBox = CheckBoxElements.get(i);
+	        try {
+	        	checkBox.click();
+	        	
+	        } catch (NoSuchElementException e) {
+	        	System.out.println("CheckBox not clickable ");
+	        } catch (Exception e) {
+	            System.out.println("An error occurred while trying to click checkbox for Program : " + e.getMessage());
+	        }       
+        	        	
+        }           
+              
+	}
+
 	
+	public boolean checkMultipleProgramsSelectedWithCheckBox() {
+		this.programNames = new ArrayList<>();
+		
+        List<WebElement> CheckBoxElements = driver.findElements(By.xpath("//div[@role='checkbox']"));
+        for (int i=1; i<CheckBoxElements.size(); i++) { //staring from index 1, to avoid master checkbox selection.
+        	WebElement checkBox = CheckBoxElements.get(i);
+	        try {
+	        	if (!checkBox.isEnabled()) { 
+	        		return false;
+	        	}
+	        	else
+	        	{
+	                String programName = checkBox.findElement(By.xpath("ancestor::tr/td[2]")).getText();
+	                System.out.println("Program name: " + programName); // Print the program name
+	                programNames.add(programName); 
+	        	}
+	        	
+	        } catch (NoSuchElementException e) {
+	        	System.out.println("CheckBox not clickable ");
+	        } catch (Exception e) {
+	            System.out.println("An error occurred while trying to click checkbox for Program : " + e.getMessage());
+	        }       
+        	        	
+        }
+        return true;
+              
+	}
+	
+	public void printSelectedCheckBoxProgramNames() {
+	    System.out.println("Selected Program Names:");
+	    for (String name : programNames) {
+	        System.out.println(name); // Process or print each program name
+	    }
+	}
 	
 	public void confirmDeletionYes()
 	{
 		 deleteYes.click();
 	}
+	
+	public void clickDeleteLeftTopButton()
+	{
+		 deleteMultiple.click();
+	}
+
 
 	public void confirmDeletionNo()
 	{
@@ -351,6 +425,7 @@ public class Program2Page {
     }
 
 	}
+	
 
 	
 	

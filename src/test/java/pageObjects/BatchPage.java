@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
@@ -19,6 +21,7 @@ import org.testng.Assert;
 
 import driverManager.DriverManager;
 import utilities.CommonUtils;
+import utilities.Pagination;
 import utilities.ResourceBundleReader;
 
 public class BatchPage {
@@ -26,7 +29,8 @@ public class BatchPage {
 	WebDriver driver;
 	ResourceBundleReader resourceBundleReader;
 	CommonUtils utilsObj = new CommonUtils();
-
+	Pagination pageObj;
+	
 	public BatchPage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(this.driver, this);
@@ -66,18 +70,22 @@ public class BatchPage {
 	@FindBy(xpath = "//table/thead/tr/th[@class='p-sortable-column']/p-sorticon")
 	List<WebElement> headerSortList;
 
-//	public List<WebElement> countofCheckbox() {
-//		List<WebElement> count_checkboxes = new ArrayList<>();
-//		count_checkboxes.addAll(checkbox);
-//		System.out.println("The count " + count_checkboxes);
-//		return count_checkboxes;
-//	}
+	// @FindBy(xpath = "//input[@id='filterGlobal']")
+	@FindBy(xpath = "//span[@class='p-input-icon-left']/input")
+	WebElement searchBox;
+
+	// @FindBy(xpath = "(//tbody[@class='p-datatable-tbody']/tr/td)[3]")
+	@FindBy(xpath = "(//tbody/tr/td)[2]")
+	WebElement searchTextEnter;
+
+	@FindBy(xpath = "//div[@class='ng-star-inserted']/button/span[text()='Logout']")
+	WebElement logout;
+
+	@FindBy(xpath = "//span[contains(@class,'angle-right')]/parent::button[contains(@class,'next')]")
+	WebElement nextPageIcon;
 
 	public boolean CheckboxesPresentEachRow() {
 		boolean isPresent = true;
-//		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-		// wait.until(ExpectedConditions.elementToBeClickable((By) checkbox));
-		// return utilsObj.listofElementDisplayed(checkbox);
 		for (WebElement eachcheckbox : checkboxList) {
 			isPresent = eachcheckbox.isDisplayed();
 			if (!isPresent)
@@ -86,7 +94,7 @@ public class BatchPage {
 		return isPresent;
 	}
 
-	static Set<Cookie> allCookies;
+	//static Set<Cookie> allCookies;
 
 	public void clickDashboardBatch() {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -151,15 +159,60 @@ public class BatchPage {
 		return isPresent;
 	}
 
+	public void searchBoxfilter() {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].click();", searchBox);
+		searchBox.sendKeys("Playwright");
+	}
+
+	public boolean searchGetText() {
+		return searchTextEnter.isDisplayed();
+		// return searchTextEnter.getText();
+	}
+
 	public String getActualTitle() {
 		return driver.getTitle();
 	}
 
-	public void loginUsingCookies() {
-		for (Cookie cookie : allCookies) {
-			driver.manage().addCookie(cookie);
-		}
-		driver.navigate().to("https://lms-frontend-hackathon-oct24-173fe394c071.herokuapp.com/");
+	public void clickLogout() {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+		wait.until(ExpectedConditions.elementToBeClickable(logout));
+		logout.click();
 	}
 
+	public String getActualTextLogout() {
+		return logout.getText();
+	}
+
+//	public void nextPageClicks() {
+//		nextPageIcon.click();
+//	}
+	public void waitForElementToBeClickable(WebElement element) {
+	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+	    wait.until(ExpectedConditions.elementToBeClickable(element));
+	}
+	
+
+
+	public void nextPageClicks() throws InterruptedException
+	{                                                         //span[contains(@class,'angle-right')]/parent::button[contains(@class,'next')]")
+		//WebElement nextButton = driver.findElement(By.xpath("//span[contains(@class,'angle-right')]/parent::button[contains(@class,'next')]"));
+		Thread.sleep(1000);
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", nextPageIcon);
+		
+		//waitForElementToBeClickable(nextPageIcon);
+		
+		WebElement nextButton = new WebDriverWait(driver, Duration.ofSeconds(10))
+		        .until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(@class,'angle-right')]/parent::button[contains(@class,'next')]")));
+		nextButton.click();
+
+		//nextPageIcon.click();
+	}
+
+//	public void loginUsingCookies() {
+//		for (Cookie cookie : allCookies) {
+//			driver.manage().addCookie(cookie);
+//		}
+//		driver.navigate().to("https://lms-frontend-hackathon-oct24-173fe394c071.herokuapp.com/");
+//	}
 }

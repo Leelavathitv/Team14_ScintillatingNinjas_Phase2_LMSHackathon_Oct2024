@@ -4,13 +4,18 @@ import org.openqa.selenium.WebDriver;
 
 import pageObjects.BatchPage;
 import pageObjects.DashboardPage;
+//import pageObjects.LogOutPage;
 import pageObjects.Program2Page;
+import utilities.Pagination;
 
 public class PageObjectManager {
 	WebDriver driver;
 	DashboardPage loginPage;
 	Program2Page program2Page;
 	BatchPage batchPage;
+	Pagination pgPage;
+	//LogOutPage logoutPage;
+	
 	
 	public  PageObjectManager(WebDriver driver) {
 		this.driver = driver;
@@ -41,4 +46,17 @@ public class PageObjectManager {
 		}
 		return batchPage;
 	}
+	public Pagination getPgPage() {
+		if(pgPage == null) {
+			pgPage = new Pagination(driver);
+		}
+		return pgPage;
+	}
+	
+//	public LogOutPage getLogOutPage() {
+//		if(logoutPage == null) {
+//			logoutPage = new LogOutPage(driver);
+//		}
+//		return logoutPage;
+//}
 }
